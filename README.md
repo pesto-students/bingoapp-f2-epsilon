@@ -2,13 +2,16 @@
 
 BINGO
 
-App will provide customers access to premium videos from the comfort of their homes. The users will be able to view videos based on categories and preferences. He will be able to add his favorite movies or shows to his playlist so that they can watch them later. Through our platform, users can have a seamless video streaming experience.
+App will provide customers access to movies from the comfort of their homes. The users will be able to view movies based on categories and preferences. Through our platform, users can have a seamless video streaming experience.
 
 ## Sample screeshots
 
-![Alt text](/assets/home.jpeg?raw=true "Optional Title")
+![Alt text](/assets/home.jpeg?raw=true "Home page")
 
-![Alt text](/assets/singlepage.jpeg?raw=true "Optional Title")
+![Alt text](/assets/video.jpeg?raw=true "Video description")
+
+![Alt text](/assets/search.jpeg?raw=true "Search page")
+
 
 ## Dependencies and its versions
 npm : 6.14.11
@@ -19,35 +22,32 @@ node: 14.6.10
 
 ## For client
 
+```
 git clone
-
 cd client
-
 np install
-
 npm start
 
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## For server
 
+```
 git clone
-
 cd server
-
-np install
-
+npm install
 npm start
 
+```
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
-
 
 
 ## build steps for client
 
+```
 npm run build
-
-``
+```
 
 ## Used Technologies
 
@@ -65,6 +65,8 @@ npm run build
 * Docker
 * Github
 * Jenkins
+* Docker
+* Kubernetes
 
 ## Utilities
 
@@ -73,6 +75,7 @@ npm run build
 ## Business tools
 
 * Slack
+* ffmpeg
 
 ## Disclaimar
 
