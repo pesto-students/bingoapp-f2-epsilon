@@ -1,22 +1,30 @@
 .App {
-    text-align: center;
-  }
-  body {
-    background-image: linear-gradient(#28272b, #f6f6f6) !important;
-  }
-  #logo-font {
-    font-family: Redressed;
-  }
-  
-  .highlight-text {
-    color: #fdf309;
-  }
-  .ui.inverted.segment {
-    background: revert !important;
-  }
-  .flex{
-    display: flex;
-  }
-  .flex div{
-    padding: 0 12px;
-  }
+  text-align: center;
+}
+body {
+  background-image: linear-gradient(
+    180deg,
+    #302f33 4.09%,
+    #4a4a54 26.04%,
+    rgba(111, 112, 128, 0.93) 48.96%,
+    rgba(94, 94, 114, 0.540918) 70.31%,
+    rgba(191, 192, 223, 0) 100%
+  ) !important;
+  background-repeat: no-repeat;
+}
+#logo-font {
+  font-family: Redressed;
+}
+
+.highlight-text {
+  color: #fdf309;
+}
+.ui.inverted.segment {
+  background: revert !important;
+}
+.flex {
+  display: flex;
+}
+.flex div {
+  padding: 0 12px;
+}

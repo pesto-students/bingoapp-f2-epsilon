@@ -4,20 +4,23 @@ import styled from "styled-components";
 
 import Footer from "../../Parts/Footer/footer";
 import CategoryList from "../../Components/CategoryCardList/categoryList";
+import MovieSlider from "../../Components/MovieSlider/movieSlider";
+import NewMoviesSlider from "../../Components/NewMoviesSlider/newMoviesSlider";
+
+const PageWrapper=styled.div`
+  max-width: 1127px;
+  margin-left: auto!important;
+  margin-right: auto!important;
+`;
 
 const HeroSection = styled.section`
-  background: linear-gradient(
-    180deg,
-    #302f33 4.09%,
-    #4a4a54 26.04%,
-    rgba(111, 112, 128, 0.93) 48.96%,
-    rgba(94, 94, 114, 0.540918) 70.31%,
-    rgba(191, 192, 223, 0) 100%
-  );
-  min-height: 100vh;
   display: flex;
   margin: 0px auto;
-  padding: 30px;
+  padding: 30px 0;
+`;
+const SliderSection = styled.section`
+  text-align:left;
+  margin:20px 0;
 `;
 
 const SingleColumn = styled.div`
@@ -36,7 +39,7 @@ const CategoryHeading = styled.h3`
 
 export default function HomePage() {
   return (
-    <>
+    <PageWrapper>
       <HeroSection>
         <SingleColumn></SingleColumn>
         <SingleColumn>
@@ -46,7 +49,15 @@ export default function HomePage() {
           </CategoryHeading>
         </SingleColumn>
       </HeroSection>
+      <SliderSection>
+        <h3>Based on previous watch</h3>
+        <MovieSlider/>
+        <h3>Based on previous watch</h3>
+        <MovieSlider/>
+        <h3>Newly released movies</h3>
+        <NewMoviesSlider/>
+      </SliderSection>
       <Footer />
-    </>
+    </PageWrapper>
   );
 }

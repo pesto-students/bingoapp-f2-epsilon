@@ -11,13 +11,13 @@ function App() {
     <div className="App">
       <Router>
         <SingleHeader />
-        <div className="ui hidden section divider">
+        {/* <div className="ui hidden section divider"> */}
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/Register" element={<Register />} />
           </Routes>
-        </div>
+        {/* </div> */}
       </Router>
     </div>
   );

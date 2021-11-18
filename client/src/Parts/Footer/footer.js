@@ -6,10 +6,13 @@ import TwitterIcon from "../../assets/twitter.png";
 import FbIcon from "../../assets/fb.png";
 
 const FooterWrapper = styled.footer`
-  padding: 20px 30px;
+  padding: 20px 0px;
   display: flex;
   justify-content: space-between;
-  background:#fff;
+  align-items:center;
+  max-width: 1127px;
+  margin-left: auto!important;
+  margin-right: auto!important;
   > p {
     width: 65%;
   }
@@ -19,6 +22,8 @@ const FooterSocialSection = styled.div``;
 
 const LabelText = styled.p`
   margin: 0px;
+  font-size:16px;
+  text-align:left;
 `;
 
 const Icon=styled.img`
