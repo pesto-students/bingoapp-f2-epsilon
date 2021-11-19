@@ -3,7 +3,7 @@ import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 function Register() {
   return (
-    <div className="ui column centered">
+    <div className="ui column centered" style={{ height: "75vh" }}>
       <Segment clearing inverted>
         <h1>
           Login to Stream{" "}

@@ -2,6 +2,8 @@
   text-align: center;
 }
 body {
+  font-family: Roboto;
+  font-style: normal;
   background-image: linear-gradient(
     180deg,
     #302f33 4.09%,
@@ -27,4 +29,7 @@ body {
 }
 .flex div {
   padding: 0 12px;
+}
+.movieSynopsis div {
+  line-height: 30px;
 }

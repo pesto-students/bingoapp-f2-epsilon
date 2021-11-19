@@ -2,15 +2,15 @@ import React from "react";
 
 import styled from "styled-components";
 
-import Footer from "../../Parts/Footer/footer";
+
 import CategoryList from "../../Components/CategoryCardList/categoryList";
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import NewMoviesSlider from "../../Components/NewMoviesSlider/newMoviesSlider";
 
-const PageWrapper=styled.div`
+const PageWrapper = styled.div`
   max-width: 1127px;
-  margin-left: auto!important;
-  margin-right: auto!important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 `;
 
 const HeroSection = styled.section`
@@ -19,8 +19,8 @@ const HeroSection = styled.section`
   padding: 30px 0;
 `;
 const SliderSection = styled.section`
-  text-align:left;
-  margin:20px 0;
+  text-align: left;
+  margin: 20px 0;
 `;
 
 const SingleColumn = styled.div`
@@ -51,13 +51,12 @@ export default function HomePage() {
       </HeroSection>
       <SliderSection>
         <h3>Based on previous watch</h3>
-        <MovieSlider/>
+        <MovieSlider />
         <h3>Based on previous watch</h3>
-        <MovieSlider/>
+        <MovieSlider />
         <h3>Newly released movies</h3>
-        <NewMoviesSlider/>
+        <NewMoviesSlider />
       </SliderSection>
-      <Footer />
     </PageWrapper>
   );
 }
