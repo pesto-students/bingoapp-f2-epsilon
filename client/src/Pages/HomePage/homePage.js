@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 import CategoryList from "../../Components/CategoryCardList/categoryList";
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
-import NewMoviesSlider from "../../Components/NewMoviesSlider/newMoviesSlider";
 import MovieCarousel from "../../Components/MovieCarousel/movieCarousel";
+import { movies,previouslyWatchedMovies,carouselImgs } from "../../Utilities"; 
 
 const PageWrapper = styled.div`
   max-width: 1127px;
@@ -18,6 +18,10 @@ const HeroSection = styled.section`
   display: flex;
   margin: 0px auto;
   padding: 30px 0;
+  @media (max-width:768px) {
+    flex-direction:column;
+    padding:0px;
+  }
 `;
 const SliderSection = styled.section`
   text-align: left;
@@ -26,6 +30,9 @@ const SliderSection = styled.section`
 
 const SingleColumn = styled.div`
   width: ${props=>props.width?props.width:'50%'};
+  @media (max-width:768px) {
+    width:100%;
+  }
 `;
 
 const CategoryHeading = styled.h3`
@@ -36,6 +43,9 @@ const CategoryHeading = styled.h3`
   > span {
     color: #fdf309;
   }
+  @media (max-width:768px) {
+    margin-top:30px!important;
+  }
 `;
 
 export default function HomePage() {
@@ -43,7 +53,7 @@ export default function HomePage() {
     <PageWrapper>
       <HeroSection>
         <SingleColumn width='63%'>
-          <MovieCarousel/>
+          <MovieCarousel images={carouselImgs}/>
         </SingleColumn>
         <SingleColumn width='37%'>
           <CategoryHeading>
@@ -54,11 +64,11 @@ export default function HomePage() {
       </HeroSection>
       <SliderSection>
         <h3>Based on previous watch</h3>
-        <MovieSlider />
+        <MovieSlider data={movies} />
         <h3>Based on previous watch</h3>
-        <MovieSlider />
+        <MovieSlider data={previouslyWatchedMovies} />
         <h3>Newly released movies</h3>
-        <NewMoviesSlider />
+        <MovieSlider data={movies} />
       </SliderSection>
     </PageWrapper>
   );

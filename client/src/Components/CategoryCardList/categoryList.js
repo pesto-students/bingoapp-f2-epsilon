@@ -12,6 +12,14 @@ const Button = styled.button`
   font-size: 20px;
   width: 45%;
   margin: 10px;
+  &:hover{
+    opacity:0.8;
+    cursor:pointer;
+  }
+  @media (max-width:768px) {
+    width:auto;
+    box-shadow:4px 4px 19px #aea9a9;
+  }
 `;
 
 const ButtonsGrid = styled.div`
@@ -19,6 +27,7 @@ display:flex;
 margin:15px 0px;
 flex-wrap:wrap;
 align-items:center;
+justify-content:center;
 `;
 
 export default function CategoryList() {

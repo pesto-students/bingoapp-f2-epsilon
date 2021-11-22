@@ -1,8 +1,10 @@
 import React from "react";
 
 import styled from "styled-components";
+
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import MovieDetail from "../../Components/MovieDetail/movieDetail";
+import { movies } from "../../Utilities";
 
 const SliderSection = styled.section`
   text-align: left;
@@ -21,7 +23,7 @@ function MovieDetailPage() {
       <MovieDetail />
       <SliderSection>
         <h3>Recommended</h3>
-        <MovieSlider />
+        <MovieSlider data={movies} />
       </SliderSection>
     </PageWrapper>
   );

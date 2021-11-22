@@ -1,7 +1,9 @@
 import React from "react";
+
 import { Button, Image, Item, Segment } from "semantic-ui-react";
-import MovieDetailImage from "../../assets/moviedetail.png";
+
 import MovieRatingImage from "../../assets/rating.png";
+import VideoPlayer from "../VideoPlayer/videoPlayer.js";
 
 const imageStyle = {
   width: "500px",
@@ -45,7 +47,10 @@ function MovieDetail() {
             Home {">>"} Movies {">>"} Tom Cruise Obliviation
           </h3>
 
-          <Item.Image src={MovieDetailImage} style={imageStyle} />
+          <Item.Content style={imageStyle}>
+            <VideoPlayer/>
+          </Item.Content>
+          {/* <Item.Image src={MovieDetailImage} style={imageStyle} /> */}
 
           <Item.Content style={itemContentStyle}>
             <h1 style={movieTitle}>Tom Cruise Obliviation</h1>

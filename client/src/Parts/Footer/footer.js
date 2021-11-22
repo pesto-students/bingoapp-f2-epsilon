@@ -16,9 +16,24 @@ const FooterWrapper = styled.footer`
   > p {
     width: 65%;
   }
+  @media (max-width:768px) {
+    flex-direction:column;
+    padding:0px;
+  justify-content: start;
+    > p {
+      width: 100%;
+      padding:0 2em;
+    }  
+  }
 `;
 
-const FooterSocialSection = styled.div``;
+const FooterSocialSection = styled.div`
+@media (max-width:768px) {
+  align-self:flex-start;
+  padding:0 2em;
+  margin-top:15px;
+}
+`;
 
 const LabelText = styled.p`
   margin: 0px;

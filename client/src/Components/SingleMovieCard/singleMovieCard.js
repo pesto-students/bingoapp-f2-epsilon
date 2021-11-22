@@ -10,7 +10,12 @@ const CardWrapper = styled.div`
   margin: 10px;
   border-radius: 10px;
 `;
-const MovieThumbnail = styled.img``;
+const MovieThumbnail = styled.img`
+object-fit:cover;
+width:100%;
+max-height:180px;
+border-radius: 10px;
+`;
 const MovieDetails = styled.div`
   display: flex;
   align-items: center;
@@ -20,15 +25,15 @@ const MovieDetails = styled.div`
     margin: 0;
   }
 `;
-export default function SingleMovieCard() {
+export default function SingleMovieCard({data}) {
   return (
     <CardWrapper>
       <Link to="/watch">
-        <MovieThumbnail src={MovieIcon} alt="Ant man" />
+        <MovieThumbnail src={data.thumbnail} alt="Ant man" />
       </Link>
       <MovieDetails>
-        <h4>Spiderman No way Home</h4>
-        <h4>65%</h4>
+        <h4>{data.title}</h4>
+        {data.completed && <h4>{data.completed}</h4>}
       </MovieDetails>
     </CardWrapper>
   );

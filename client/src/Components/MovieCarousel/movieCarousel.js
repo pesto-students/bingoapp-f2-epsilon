@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 const useInterval = (callback, delay) => {
     const savedCallback = useRef();
-
     useEffect(() => {
         savedCallback.current = callback;
     });
-
     useEffect(() => {
         function tick() {
             savedCallback.current();
@@ -20,21 +20,8 @@ const useInterval = (callback, delay) => {
     );
 }
 
-//your images
-const images = [
-  { imgUrl: 'https://i.picsum.photos/id/340/500/200.jpg?hmac=ZqU8NpRqjAmMX6qn-bq1TnIbdzElOV7jjUoTy6pQQUM' },
-  { imgUrl: 'https://i.picsum.photos/id/729/500/200.jpg?hmac=hbXiJl8vDO6fRuaa2-9ZqF2F55MG-bIitwD-fLxfn6o' },
-  { imgUrl: 'https://i.picsum.photos/id/741/500/200.jpg?hmac=srxleheRKYbbmJYuFTQV52k-ySXvuCwP9M9vQ7vrjQU' },
-  { imgUrl: 'https://i.picsum.photos/id/65/500/200.jpg?hmac=Wnfco1TbUmHhDDYWRTRSfY3H82KHCAEatLirl1QdJJU' },
-  { imgUrl: 'https://i.picsum.photos/id/218/500/200.jpg?hmac=zrtE43YtBDGc4GvmQmzL6aj0IU-3t3kHJUR5JUC5faI' },
-  { imgUrl: 'https://i.picsum.photos/id/81/500/200.jpg?hmac=WxvV22kLuuIVvym00EsUS2OAjMBr5Cjkk2o397Sg3u0' },
-  { imgUrl: 'https://i.picsum.photos/id/525/500/200.jpg?hmac=E3JxoChGh1U9RnlNx2f72AQZz_naC04Au8v1oE_FkZE' },
-  { imgUrl: 'https://i.picsum.photos/id/347/500/200.jpg?hmac=fnbWS6nc610hpWu3c54OQBoPsYPKl1ygW4BB9QM2oDc' },
-  { imgUrl: 'https://i.picsum.photos/id/676/500/200.jpg?hmac=no_hbCU22yltn4J3Bbf_Y0F6YSLdQ84sRUiZKlWlA18' }
-];
 
-const Carousel = (props) => {
-//   const { images } = props;
+const Carousel = ({images}) => {
   const len = images.length;
   const [activeIndex, setActive] = useState(0);
   
@@ -82,7 +69,11 @@ const Carousel = (props) => {
             onClick={() => setActive(index)}
             style={getStyle(index)}
           >
+          {activeIndex===index?<Link to="/watch">
             <img src={imgUrl} />
+          </Link>:
+            <img src={imgUrl} />
+          }
           </div>
         ))}
       </div>
