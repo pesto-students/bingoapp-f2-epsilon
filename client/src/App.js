@@ -5,6 +5,9 @@ import SingleHeader from "./Parts/Header/header";
 import Footer from "./Parts/Footer/footer";
 import HomePage from "./Pages/HomePage/homePage";
 import MovieDetailPage from "./Pages/MovieDetailPage/movieDetailPage";
+import { AuthProvider } from "./Utilities/authContext";
+import AuthRoute from "./Utilities/authRoute";
+import UnauthenticatedRoute from "./Utilities/unauthenticatedRoute";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
@@ -12,16 +15,50 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <SingleHeader />
-        {/* <div className="ui hidden section divider"> */}
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/watch" element={<MovieDetailPage />} />
-        </Routes>
-        {/* </div> */}
-        <Footer />
+        <AuthProvider>
+          <SingleHeader />
+          {/* <div className="ui hidden section divider"> */}
+          <Routes>
+            <Route
+              exact
+              path="/login"
+              element={
+                <UnauthenticatedRoute>
+                  <Login />
+                </UnauthenticatedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/Register"
+              element={
+                <UnauthenticatedRoute>
+                  <Register />
+                </UnauthenticatedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/"
+              element={
+                <AuthRoute>
+                  <HomePage />
+                </AuthRoute>
+              }
+            />
+            <Route
+              exact
+              path="/watch"
+              element={
+                <AuthRoute>
+                  <MovieDetailPage />
+                </AuthRoute>
+              }
+            />
+          </Routes>
+          {/* </div> */}
+          <Footer />
+        </AuthProvider>
       </Router>
     </div>
   );

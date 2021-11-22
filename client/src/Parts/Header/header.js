@@ -1,7 +1,31 @@
-import React from "react";
-import { Container, Header, Segment } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Container,
+  Header,
+  Segment,
+  Button,
+  Message,
+  Icon,
+} from "semantic-ui-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../Utilities/authContext";
+
 function SingleHeader() {
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    setError("");
+
+    try {
+      await logout();
+      navigate("/login", { replace: true });
+    } catch {
+      setError("Failed to log out");
+    }
+  }
+
   return (
     <div>
       <Segment clearing inverted>
@@ -12,13 +36,28 @@ function SingleHeader() {
             </Header>
           </Link>
           <Header size="medium" floated="right">
+            {error && <Message error header={error} />}
             <div className="flex">
-              <div>
-                <Link to="/login">Log In </Link>
-              </div>
-              <div>
-                <Link to="/register"> Sign Up</Link>
-              </div>
+              {currentUser ? (
+                <>
+                  <Button variant="link" onClick={handleLogout}>
+                    Log Out <Icon name="sign out" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Link to="/login">
+                      Log In <Icon name="sign in" />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/register">
+                      Sign Up <Icon name="signup" />
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </Header>
         </Container>
