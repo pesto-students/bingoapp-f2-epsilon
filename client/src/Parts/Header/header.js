@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Container, Header, Segment, Button, Message } from "semantic-ui-react";
+import {
+  Container,
+  Header,
+  Segment,
+  Button,
+  Message,
+  Icon,
+} from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Utilities/authContext";
 
@@ -33,18 +40,21 @@ function SingleHeader() {
             <div className="flex">
               {currentUser ? (
                 <>
-                  <span>{currentUser.email}</span>
                   <Button variant="link" onClick={handleLogout}>
-                    Log Out
+                    Log Out <Icon name="sign out" />
                   </Button>
                 </>
               ) : (
                 <>
                   <div>
-                    <Link to="/login">Log In </Link>
+                    <Link to="/login">
+                      Log In <Icon name="sign in" />
+                    </Link>
                   </div>
                   <div>
-                    <Link to="/register"> Sign Up</Link>
+                    <Link to="/register">
+                      Sign Up <Icon name="signup" />
+                    </Link>
                   </div>
                 </>
               )}
