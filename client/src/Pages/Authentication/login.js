@@ -5,7 +5,7 @@ import { useAuth } from "../../Utilities/authContext";
 
 function Login() {
   const [formData, updateFormData] = useState();
-  const { login } = useAuth();
+  const { login , signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -69,6 +69,9 @@ function Login() {
                 Log In
               </Button>
             </Form>
+            <Button primary onClick={signInWithGoogle}>
+              <span> Continue with Google</span>
+            </Button>
           </Grid.Column>
         </Grid>
         <h3>

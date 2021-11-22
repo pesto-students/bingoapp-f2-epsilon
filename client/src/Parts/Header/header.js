@@ -32,9 +32,12 @@ function SingleHeader() {
             {error && <Message error header={error} />}
             <div className="flex">
               {currentUser ? (
-                <Button variant="link" onClick={handleLogout}>
-                  Log Out
-                </Button>
+                <>
+                  <span>{currentUser.email}</span>
+                  <Button variant="link" onClick={handleLogout}>
+                    Log Out
+                  </Button>
+                </>
               ) : (
                 <>
                   <div>
