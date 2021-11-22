@@ -1,7 +1,45 @@
-import React from "react";
-import { Button, Form, Grid, Segment } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Button, Form, Grid, Segment, Message } from "semantic-ui-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../Utilities/authContext";
 
 function Register() {
+  const [formData, updateFormData] = useState();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let re = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i;
+    if (re.test(formData.email)) {
+      return setError("Email is Invalid");
+    }
+
+    if (formData.password !== formData.confirm_password) {
+      return setError("Passwords do not match");
+    }
+
+    try {
+      setError("");
+      setLoading(true);
+      await signup(formData.email, formData.password);
+      navigate("/", { replace: true });
+    } catch {
+      setError("Failed to create an account");
+    }
+
+    setLoading(false);
+  }
   return (
     <div className="ui column centered" style={{ height: "75vh" }}>
       <Segment clearing inverted>
@@ -13,19 +51,25 @@ function Register() {
         </h1>
         <Grid centered>
           <Grid.Column style={{ maxWidth: 550, marginTop: 20 }}>
-            <Form>
+            {error && <Message error header={error} />}
+            <Form onSubmit={handleSubmit}>
               <Form.Field>
-                <Form.Input name="email" placeholder="Email" />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input name="username" placeholder="Username" />
+                <Form.Input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="Email"
+                  required
+                />
               </Form.Field>
 
               <Form.Field>
                 <Form.Input
                   type="password"
                   name="password"
+                  onChange={handleChange}
                   placeholder="Password"
+                  required
                 />
               </Form.Field>
 
@@ -33,16 +77,24 @@ function Register() {
                 <Form.Input
                   type="password"
                   name="confirm_password"
+                  onChange={handleChange}
                   placeholder="Confirm Password"
+                  required
                 />
               </Form.Field>
 
-              <Button color="red" type="submit">
+              <Button disabled={loading} color="red" type="submit">
                 Sign Up
               </Button>
             </Form>
           </Grid.Column>
         </Grid>
+        <h3>
+          Already have an account?{" "}
+          <Link to="/login">
+            <span className="highlight-text">Log In</span>
+          </Link>
+        </h3>
       </Segment>
     </div>
   );
