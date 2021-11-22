@@ -6,6 +6,7 @@ import styled from "styled-components";
 import CategoryList from "../../Components/CategoryCardList/categoryList";
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import NewMoviesSlider from "../../Components/NewMoviesSlider/newMoviesSlider";
+import MovieCarousel from "../../Components/MovieCarousel/movieCarousel";
 
 const PageWrapper = styled.div`
   max-width: 1127px;
@@ -24,7 +25,7 @@ const SliderSection = styled.section`
 `;
 
 const SingleColumn = styled.div`
-  width: 50%;
+  width: ${props=>props.width?props.width:'50%'};
 `;
 
 const CategoryHeading = styled.h3`
@@ -41,8 +42,10 @@ export default function HomePage() {
   return (
     <PageWrapper>
       <HeroSection>
-        <SingleColumn></SingleColumn>
-        <SingleColumn>
+        <SingleColumn width='63%'>
+          <MovieCarousel/>
+        </SingleColumn>
+        <SingleColumn width='37%'>
           <CategoryHeading>
             Choose from tons of <span>Categories</span> to Watch
             <CategoryList />

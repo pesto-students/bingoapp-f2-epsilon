@@ -22,3 +22,46 @@ code {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* carousel */
+
+.carousel {
+  /* height: 220px; */
+}
+.carousel .card-container {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+.carousel .card-container .card {
+  height: 100%;
+  width: 33.3%;
+  transition: all 1s;
+  position: absolute;
+  opacity: 0.8;
+  transform: scale(0.8);
+  z-index: 998;
+  cursor: pointer;
+  user-select: none;
+}
+.carousel .card-container .card img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+.carousel .rects {
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel .rects .rect {
+  height: 2px;
+  width: 20px;
+  background-color: #ddd;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.carousel .rects .active {
+  background-color: #c62f2f;
+}
