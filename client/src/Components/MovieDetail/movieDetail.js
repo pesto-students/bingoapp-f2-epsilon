@@ -2,8 +2,9 @@ import React from "react";
 
 import { Button, Image, Item, Segment } from "semantic-ui-react";
 
-import MovieRatingImage from "../../assets/rating.png";
+import Breadcrumbs from "../../Parts/Breadcrumbs/breadcrumbs";
 import VideoPlayer from "../VideoPlayer/videoPlayer.js";
+import { movieDetails } from "../../Utilities";
 
 const imageStyle = {
   width: "500px",
@@ -43,64 +44,53 @@ function MovieDetail() {
     <Segment clearing inverted>
       <Item.Group>
         <Item style={itemStyle}>
-          <h3 style={itemContentStyle}>
-            Home {">>"} Movies {">>"} Tom Cruise Obliviation
-          </h3>
+          <Breadcrumbs />
+          {movieDetails.map((data) => (
+            <>
+              <Item.Content style={imageStyle}>
+                <VideoPlayer />
+              </Item.Content>
+              <Item.Content style={itemContentStyle}>
+                <h1 style={movieTitle}>{data.name}</h1>
 
-          <Item.Content style={imageStyle}>
-            <VideoPlayer/>
-          </Item.Content>
-          {/* <Item.Image src={MovieDetailImage} style={imageStyle} /> */}
+                <Item.Meta>
+                  <Image src={data.rating} />
+                </Item.Meta>
 
-          <Item.Content style={itemContentStyle}>
-            <h1 style={movieTitle}>Tom Cruise Obliviation</h1>
+                <Item.Meta
+                  className="flex"
+                  style={{ color: "white", alignItems: "baseline" }}
+                >
+                  <Button primary>Play Movie</Button>
+                  <div>
+                    <h4>ADD TO WATCHLIST</h4>
+                  </div>
+                  <div>
+                    <h5>SHARE</h5>
+                  </div>
+                </Item.Meta>
 
-            <Item.Meta>
-              <Image src={MovieRatingImage} />
-            </Item.Meta>
+                <Item.Meta className="movieSynopsis" style={movieSynopsis}>
+                  <div>
+                    Language:{" "}
+                    <span className="highlight-text">{data.language} </span>
+                  </div>
+                  <div>
+                    Genere: <span className="highlight-text">{data.genre}</span>
+                  </div>
+                  <div>
+                    Year: <span className="highlight-text">{data.year}</span>
+                  </div>
+                  <div>
+                    Artist:{" "}
+                    <span className="highlight-text">{data.artist}</span>
+                  </div>
+                </Item.Meta>
 
-            <span className="highlight-text">Hindi | Comedy | 2015</span>
-
-            <Item.Meta
-              className="flex"
-              style={{ color: "white", alignItems: "baseline" }}
-            >
-              <Button primary>Play Movie</Button>
-              <div>
-                <h4>ADD TO WATCHLIST</h4>
-              </div>
-              <div>
-                <h5>SHARE</h5>
-              </div>
-            </Item.Meta>
-
-            <Item.Meta className="movieSynopsis" style={movieSynopsis}>
-              <div>
-                Language: <span className="highlight-text">Hindi </span>
-              </div>
-              <div>
-                Genere:
-                <span className="highlight-text">
-                  Comedy, Action, Bollywood
-                </span>
-              </div>
-              <div>
-                Year: <span className="highlight-text">2015</span>
-              </div>
-              <div>
-                Artist: <span className="highlight-text">Naga Pesto</span>
-              </div>
-            </Item.Meta>
-
-            <Item.Description>
-              While running from a drug deal gone bad, Mike Ross, a brilliant
-              young college-dropout, slips into a job interview with one of New
-              York City's best legal closers, Harvey Specter. Tired of
-              cookie-cutter law school grads, Harvey takes a gamble by hiring
-              Mike on the spot after he recognizes his raw talent and
-              photographic memory.
-            </Item.Description>
-          </Item.Content>
+                <Item.Description>{data.description}</Item.Description>
+              </Item.Content>
+            </>
+          ))}
         </Item>
       </Item.Group>
     </Segment>

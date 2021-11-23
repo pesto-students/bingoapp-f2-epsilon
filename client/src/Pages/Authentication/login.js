@@ -5,7 +5,7 @@ import { useAuth } from "../../Utilities/authContext";
 
 function Login() {
   const [formData, updateFormData] = useState();
-  const { login , signInWithGoogle } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Login() {
       await login(formData.email, formData.password);
       navigate("/", { replace: true });
     } catch {
-      setError("Email Or Password is Incorrect");
+      setError("Email or Password is Incorrect");
     }
 
     setLoading(false);
@@ -53,6 +53,7 @@ function Login() {
                   placeholder="Email"
                   className="ui transparent"
                   onChange={handleChange}
+                  required
                 />
               </Form.Field>
 
@@ -62,6 +63,7 @@ function Login() {
                   name="password"
                   placeholder="Password"
                   onChange={handleChange}
+                  required
                 />
               </Form.Field>
 

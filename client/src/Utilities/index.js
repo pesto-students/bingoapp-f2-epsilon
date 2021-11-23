@@ -1,3 +1,4 @@
+import MovieRatingImage from "../assets/rating.png";
 export const movies = [
   {
     id: 1,
@@ -130,15 +131,52 @@ export const previouslyWatchedMovies = [
   },
 ];
 
-export const carouselImgs=[
-    {imgUrl:"https://www.indiewire.com/wp-content/uploads/2021/11/red-notice_netflix.jpeg",},
-    {imgUrl:'https://www.hollywoodreporter.com/wp-content/uploads/2021/05/Eternals_Teaser_1-Sheet_v10_Lg-H-2021.jpg',},
-    {imgUrl:'https://www.ubuy.co.in/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvODFIR295TTlhdFMuX1NMMTUwMF8uanBn.jpg'},
-    {imgUrl:'https://flxt.tmsimg.com/assets/p10592915_p_v10_ad.jpg'},
-    {imgUrl:'https://images.indianexpress.com/2017/08/the-hitmans-bodyguard-ryan-reynolds-samuel-l-jackson-759.jpg'},
-    {imgUrl:'https://cdn.theatlantic.com/thumbor/npBkDx3vL6SuA53bHmpa1OQL31Q=/0x0:2500x1406/1600x900/media/img/mt/2020/12/rev_1_WW84_16249r_High_Res_JPEG/original.jpg'},
-    {imgUrl:'https://www.themoviedb.org/t/p/w780/9QusGjxcYvfPD1THg6oW3RLeNn7.jpg'},
-    {imgUrl:'https://static01.nyt.com/images/2014/05/23/arts/23BLENDED/23BLENDED-superJumbo-v2.jpg'},
-    {imgUrl:'https://i.ytimg.com/vi/8AO19XY2rqc/maxresdefault.jpg'},
-    {imgUrl:'https://www.themoviedb.org/t/p/w780/ig7qUy7drkEFZNCK7gi0hMn1WMN.jpg'},
-]
+export const carouselImgs = [
+  {
+    imgUrl:
+      "https://www.indiewire.com/wp-content/uploads/2021/11/red-notice_netflix.jpeg",
+  },
+  {
+    imgUrl:
+      "https://www.hollywoodreporter.com/wp-content/uploads/2021/05/Eternals_Teaser_1-Sheet_v10_Lg-H-2021.jpg",
+  },
+  {
+    imgUrl:
+      "https://www.ubuy.co.in/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvODFIR295TTlhdFMuX1NMMTUwMF8uanBn.jpg",
+  },
+  { imgUrl: "https://flxt.tmsimg.com/assets/p10592915_p_v10_ad.jpg" },
+  {
+    imgUrl:
+      "https://images.indianexpress.com/2017/08/the-hitmans-bodyguard-ryan-reynolds-samuel-l-jackson-759.jpg",
+  },
+  {
+    imgUrl:
+      "https://cdn.theatlantic.com/thumbor/npBkDx3vL6SuA53bHmpa1OQL31Q=/0x0:2500x1406/1600x900/media/img/mt/2020/12/rev_1_WW84_16249r_High_Res_JPEG/original.jpg",
+  },
+  {
+    imgUrl:
+      "https://www.themoviedb.org/t/p/w780/9QusGjxcYvfPD1THg6oW3RLeNn7.jpg",
+  },
+  {
+    imgUrl:
+      "https://static01.nyt.com/images/2014/05/23/arts/23BLENDED/23BLENDED-superJumbo-v2.jpg",
+  },
+  { imgUrl: "https://i.ytimg.com/vi/8AO19XY2rqc/maxresdefault.jpg" },
+  {
+    imgUrl:
+      "https://www.themoviedb.org/t/p/w780/ig7qUy7drkEFZNCK7gi0hMn1WMN.jpg",
+  },
+];
+
+export const movieDetails = [
+  {
+    name: "Tom Cruise Obliviation",
+    rating: MovieRatingImage,
+    language: "Hindi",
+    genre: "Comedy, Action, Bollywood",
+    year: "2015",
+    artist: "Naga Pesto",
+    description:
+      "While running from a drug deal gone bad, Mike Ross, a brilliant young college-dropout, slips into a job interview with one of New York City's best legal closers, Harvey Specter. Tired of cookie-cutter law school grads, Harvey takes a gamble by hiring Mike on the spot after he recognizes his raw talent and photographic memory.",
+  },
+];

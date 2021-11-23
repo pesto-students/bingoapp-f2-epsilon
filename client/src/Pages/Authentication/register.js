@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Grid, Segment, Message } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Utilities/authContext";
+import validator from "validator";
 
 function Register() {
   const [formData, updateFormData] = useState();
@@ -20,13 +21,17 @@ function Register() {
   };
   async function handleSubmit(e) {
     e.preventDefault();
-    let re = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i;
-    if (re.test(formData.email)) {
+
+    if (!validator.isEmail(formData.email)) {
       return setError("Email is Invalid");
     }
 
     if (formData.password !== formData.confirm_password) {
       return setError("Passwords do not match");
+    }
+
+    if (formData.password.length < 8) {
+      return setError("Password Must Be 8 Characters Long");
     }
 
     try {
