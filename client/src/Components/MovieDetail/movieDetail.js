@@ -26,7 +26,7 @@ const movieTitle = {
   fontStyle: "normal",
   fontWeight: "bold",
   fontSize: "30px",
-  lineHeight: "35px",
+  lineHeight: "60px",
 };
 
 const movieSynopsis = {
@@ -45,9 +45,9 @@ function MovieDetail() {
       <Item.Group>
         <Item style={itemStyle}>
           <Breadcrumbs />
-          {movieDetails.map((data) => (
+          {movieDetails.map((data,key) => (
             <>
-              <Item.Content style={imageStyle}>
+              <Item.Content key={key} style={imageStyle}>
                 <VideoPlayer />
               </Item.Content>
               <Item.Content style={itemContentStyle}>

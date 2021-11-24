@@ -67,7 +67,7 @@ function Login() {
                 />
               </Form.Field>
 
-              <Button disabled={loading} color="red" type="submit">
+              <Button disabled={loading} data-testid="login" color="red" type="submit">
                 Log In
               </Button>
             </Form>

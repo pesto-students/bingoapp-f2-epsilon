@@ -170,7 +170,7 @@ export const carouselImgs = [
 
 export const movieDetails = [
   {
-    name: "Tom Cruise Obliviation",
+    name: "Tom Cruise Oblivion",
     rating: MovieRatingImage,
     language: "Hindi",
     genre: "Comedy, Action, Bollywood",
