@@ -36,6 +36,17 @@ body {
 .ui.breadcrumb a {
   color: white !important;
 }
-.ui.button{
+.ui.button {
   margin-top: 12px !important;
+}
+.ui .logoutbtn{
+  margin-top: 0 !important;
+}
+@media screen and (max-width: 600px) {
+  .ui.header .rsicon {
+    padding: 8px !important;
+  }
+  .ui.header .rscontent {
+    display:none !important;
+  }
 }

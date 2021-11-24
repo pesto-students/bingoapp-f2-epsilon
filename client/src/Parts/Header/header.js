@@ -40,7 +40,7 @@ function SingleHeader() {
             <div className="flex">
               {currentUser ? (
                 <>
-                  <Button variant="link" onClick={handleLogout}>
+                  <Button variant="link" className="logoutbtn" onClick={handleLogout}>
                     Log Out <Icon name="sign out" />
                   </Button>
                 </>
@@ -48,12 +48,12 @@ function SingleHeader() {
                 <>
                   <div>
                     <Link to="/login">
-                      Log In <Icon name="sign in" />
+                      <span className="rscontent">Log In</span> <Icon className="rsicon" name="sign in" />
                     </Link>
                   </div>
                   <div>
                     <Link to="/register">
-                      Sign Up <Icon name="signup" />
+                      <span className="rscontent">Sign Up</span> <Icon className="rsicon" name="signup" />
                     </Link>
                   </div>
                 </>
