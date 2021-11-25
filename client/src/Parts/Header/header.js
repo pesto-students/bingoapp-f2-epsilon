@@ -6,9 +6,12 @@ import {
   Button,
   Message,
   Icon,
+  Dropdown,
 } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Utilities/authContext";
+import { headerOptions } from "../../Utilities";
+import SearchBar from "../../Components/SearchBar/searchBar";
 
 function SingleHeader() {
   const [error, setError] = useState("");
@@ -35,12 +38,26 @@ function SingleHeader() {
               Bingo
             </Header>
           </Link>
+          {currentUser ? (
+            <Header size="small" inverted floated="left">
+              <Header.Content className="flex">
+                <Dropdown text="Categories" options={headerOptions} />
+                <SearchBar />
+              </Header.Content>
+            </Header>
+          ) : (
+            ""
+          )}
           <Header size="medium" floated="right">
             {error && <Message error header={error} />}
             <div className="flex">
               {currentUser ? (
                 <>
-                  <Button variant="link" className="logoutbtn" onClick={handleLogout}>
+                  <Button
+                    variant="link"
+                    className="logoutbtn"
+                    onClick={handleLogout}
+                  >
                     Log Out <Icon name="sign out" />
                   </Button>
                 </>
@@ -48,12 +65,14 @@ function SingleHeader() {
                 <>
                   <div>
                     <Link to="/login">
-                      <span className="rscontent">Log In</span> <Icon className="rsicon" name="sign in" />
+                      <span className="rscontent">Log In</span>{" "}
+                      <Icon className="rsicon" name="sign in" />
                     </Link>
                   </div>
                   <div>
                     <Link to="/register">
-                      <span className="rscontent">Sign Up</span> <Icon className="rsicon" name="signup" />
+                      <span className="rscontent">Sign Up</span>{" "}
+                      <Icon className="rsicon" name="signup" />
                     </Link>
                   </div>
                 </>

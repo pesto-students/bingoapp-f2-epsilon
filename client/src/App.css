@@ -25,7 +25,7 @@ body {
   background: revert !important;
 }
 .flex {
-  display: flex;
+  display: flex !important;
 }
 .flex div {
   padding: 0 12px;
@@ -39,7 +39,7 @@ body {
 .ui.button {
   margin-top: 12px !important;
 }
-.ui .logoutbtn{
+.ui .logoutbtn {
   margin-top: 0 !important;
 }
 @media screen and (max-width: 600px) {
@@ -47,6 +47,73 @@ body {
     padding: 8px !important;
   }
   .ui.header .rscontent {
-    display:none !important;
+    display: none !important;
   }
+}
+.ui.dropdown .menu {
+  z-index: 999;
+}
+.content {
+  padding: 11px;
+}
+.auto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+}
+
+.prompt {
+  padding: 10px;
+  height: 20px;
+  border: 1px solid purple;
+  margin: 10px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.autoContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+  white-space: normal;
+  text-align: left;
+  text-transform: none;
+  background: #fff;
+  margin-top: 0.5em;
+  width: 18em;
+  border-radius: 0.28571429rem;
+  -webkit-box-shadow: 0 2px 4px 0 rgb(34 36 38 / 12%),
+    0 2px 10px 0 rgb(34 36 38 / 15%);
+  box-shadow: 0 2px 4px 0 rgb(34 36 38 / 12%), 0 2px 10px 0 rgb(34 36 38 / 15%);
+  z-index: 1000;
+}
+
+.options {
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  font-size: 17px;
+  padding: 0.85714286em 1.14285714em;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.33;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+}
+
+.hoverColor:hover {
+  background-color: grey;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
 }

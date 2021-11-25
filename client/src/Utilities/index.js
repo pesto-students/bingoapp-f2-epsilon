@@ -180,3 +180,24 @@ export const movieDetails = [
       "While running from a drug deal gone bad, Mike Ross, a brilliant young college-dropout, slips into a job interview with one of New York City's best legal closers, Harvey Specter. Tired of cookie-cutter law school grads, Harvey takes a gamble by hiring Mike on the spot after he recognizes his raw talent and photographic memory.",
   },
 ];
+
+export const headerOptions = [
+  {
+    key: 'today',
+    text: 'today',
+    value: 'today',
+    content: 'Today',
+  },
+  {
+    key: 'this week',
+    text: 'this week',
+    value: 'this week',
+    content: 'This Week',
+  },
+  {
+    key: 'this month',
+    text: 'this month',
+    value: 'this month',
+    content: 'This Month',
+  },
+]
