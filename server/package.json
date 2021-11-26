@@ -1,0 +1,14 @@
+{
+  "name": "bingo",
+  "version": "1.0.0",
+  "description": "Backened app for movies",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ep-Silon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
