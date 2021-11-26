@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 
-function getCityData() {
+function getMovieData() {
   return fetch("data.json", {
     headers: {
       "Content-Type": "application/json",
@@ -12,17 +12,17 @@ function getCityData() {
 
 function SearchBar() {
   const [data, setData] = useState([]);
-  const [city, setCity] = useState("");
+  const [movie, setMovie] = useState("");
   const [display, setDisplay] = useState(false);
   const wrapperRef = useRef(null);
 
-  async function handler(city) {
-    console.log("this is happened " + city);
-    const data = await getCityData();
+  async function handler(movie) {
+    console.log("this is happened " + movie);
+    const data = await getMovieData();
     const filterData = data.filter(
-      (d) => d.title.toLowerCase().indexOf(city.toLowerCase()) !== -1
+      (d) => d.title.toLowerCase().indexOf(movie.toLowerCase()) !== -1
     );
-    if (city) {
+    if (movie) {
       setData(filterData);
     } else {
       setData([]);
@@ -31,8 +31,8 @@ function SearchBar() {
   let debouncedRef = useRef(debounce(handler, 300));
 
   useEffect(() => {
-    debouncedRef.current(city);
-  }, [city]);
+    debouncedRef.current(movie);
+  }, [movie]);
 
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
@@ -53,8 +53,8 @@ function SearchBar() {
     debouncedSave();
   };
 
-  const updateCity = (cityClick) => {
-    setCity(cityClick);
+  const updateMovie = (movieClick) => {
+    setMovie(movieClick);
     setDisplay(false);
   };
   return (
@@ -63,12 +63,12 @@ function SearchBar() {
         <div class="ui icon input">
           <input
             class="prompt"
-            value={city}
+            value={movie}
             onClick={showDisplay}
             type="text"
             placeholder="Search"
             onChange={(event) => {
-              setCity(event.target.value);
+              setMovie(event.target.value);
             }}
           />
           <i class="search icon"></i>
@@ -79,7 +79,7 @@ function SearchBar() {
           {data.map((el, i) => {
             return (
               <div className="hoverColor">
-                <div className="options" onClick={() => updateCity(el.title)}>
+                <div className="options" onClick={() => updateMovie(el.title)}>
                   <span key={i}>{el.title}</span>
                 </div>
               </div>
