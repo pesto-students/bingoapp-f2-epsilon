@@ -53,7 +53,7 @@ export default function HomePage() {
     <PageWrapper>
       <HeroSection>
         <SingleColumn width='63%'>
-          <MovieCarousel images={carouselImgs}/>
+          <MovieCarousel images={movies}/>
         </SingleColumn>
         <SingleColumn width='37%'>
           <CategoryHeading>

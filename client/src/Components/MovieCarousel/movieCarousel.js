@@ -62,17 +62,17 @@ const Carousel = ({images}) => {
   return (
     <div className="carousel">
       <div className="card-container">
-        {images.map(({ imgUrl }, index) => (
+        {images.map(({ thumbnail,id }, index) => (
           <div
             className="card"
             key={index}
             onClick={() => setActive(index)}
             style={getStyle(index)}
           >
-          {activeIndex===index?<Link to="/watch">
-            <img src={imgUrl} />
+          {activeIndex===index?<Link to={`/watch/${id}`}>
+            <img src={thumbnail} />
           </Link>:
-            <img src={imgUrl} />
+            <img src={thumbnail} />
           }
           </div>
         ))}

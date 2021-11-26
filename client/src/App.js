@@ -5,6 +5,7 @@ import SingleHeader from "./Parts/Header/header";
 import Footer from "./Parts/Footer/footer";
 import HomePage from "./Pages/HomePage/homePage";
 import MovieDetailPage from "./Pages/MovieDetailPage/movieDetailPage";
+import VideoPlayerPage from "./Pages/videoPlayer/videoPlayerPage";
 import { AuthProvider } from "./Utilities/authContext";
 import AuthRoute from "./Utilities/authRoute";
 import UnauthenticatedRoute from "./Utilities/unauthenticatedRoute";
@@ -12,6 +13,7 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 function App() {
+  console.log('location',window.location)
   return (
     <div className="App">
       <Router>
@@ -37,6 +39,7 @@ function App() {
                 </UnauthenticatedRoute>
               }
             />
+
             <Route
               exact
               path="/"
@@ -48,7 +51,16 @@ function App() {
             />
             <Route
               exact
-              path="/watch"
+              path="/videos/:videoSlug"
+              element={
+                <AuthRoute>
+                  <VideoPlayerPage />
+                </AuthRoute>
+              }
+            />
+            <Route
+              exact
+              path="/watch/:videoId"
               element={
                 <AuthRoute>
                   <MovieDetailPage />

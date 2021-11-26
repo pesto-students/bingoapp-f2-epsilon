@@ -15,6 +15,7 @@ object-fit:cover;
 width:100%;
 max-height:180px;
 border-radius: 10px;
+cursor:pointer;
 `;
 const MovieDetails = styled.div`
   display: flex;
@@ -28,9 +29,7 @@ const MovieDetails = styled.div`
 export default function SingleMovieCard({data}) {
   return (
     <CardWrapper>
-      <Link to="/watch">
-        <MovieThumbnail src={data.thumbnail} alt="Ant man" />
-      </Link>
+        <MovieThumbnail id={data.id} src={data.thumbnail} alt="Ant man" />
       <MovieDetails>
         <h4>{data.title}</h4>
         {data.completed && <h4>{data.completed}</h4>}

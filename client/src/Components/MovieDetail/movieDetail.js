@@ -1,10 +1,11 @@
 import React from "react";
 
 import { Button, Image, Item, Segment } from "semantic-ui-react";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 import Breadcrumbs from "../../Parts/Breadcrumbs/breadcrumbs";
 import VideoPlayer from "../VideoPlayer/videoPlayer.js";
-import { movieDetails } from "../../Utilities";
+import { movieDetails,movies } from "../../Utilities";
 
 const imageStyle = {
   width: "500px",
@@ -40,15 +41,20 @@ const movieSynopsis = {
 };
 
 function MovieDetail() {
+  const { videoId } = useParams();
+  const thumbnailUrl=movies.filter(movie=>movie.id===parseInt(videoId))
+  console.log("videoId", videoId,movies,thumbnailUrl[0].thumbnail);
   return (
     <Segment clearing inverted>
       <Item.Group>
         <Item style={itemStyle}>
           <Breadcrumbs />
-          {movieDetails.map((data,key) => (
+          {movieDetails.map((data, key) => (
             <>
               <Item.Content key={key} style={imageStyle}>
-                <VideoPlayer />
+                <Link to={`/videos/${videoId}`}>
+                  <VideoPlayer thumbnail={thumbnailUrl[0].thumbnail} />
+                </Link>
               </Item.Content>
               <Item.Content style={itemContentStyle}>
                 <h1 style={movieTitle}>{data.name}</h1>
