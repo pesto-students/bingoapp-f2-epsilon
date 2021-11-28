@@ -33,7 +33,7 @@ code {
   position: relative;
   overflow: hidden;
 }
-.carousel .card-container .card {
+.carousel .card-container .carousel-card {
   height: 100%;
   width: 33.3%;
   transition: all 1s;
@@ -44,7 +44,7 @@ code {
   cursor: pointer;
   user-select: none;
 }
-.carousel .card-container .card img {
+.carousel .card-container .carousel-card img {
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -66,7 +66,7 @@ code {
   background-color: #c62f2f;
 }
 @media only screen and (max-width: 768px) {
-  .carousel .card-container .card{
+  .carousel .card-container .carousel-card{
     width:100%;
     left:unset!important;
     transform: scale(0.8)!important;

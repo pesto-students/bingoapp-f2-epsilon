@@ -190,3 +190,12 @@ export const headerOptions = [
     content: 'This Month',
   },
 ]
+
+export const categories=[
+  {id:1,name:'Drama'},
+  {id:1,name:'Sci-fi'},
+  {id:1,name:'Fantasy'},
+  {id:1,name:'Comedy'},
+  {id:1,name:'Romance'},
+  {id:1,name:'Thriller'},
+]

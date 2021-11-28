@@ -2,6 +2,8 @@ import React from "react";
 
 import styled from "styled-components";
 
+import { categories } from "../../Utilities";
+
 const Button = styled.button`
   background: linear-gradient(180deg, #3c3c43 0%, rgba(60, 60, 67, 0) 100%);
   box-shadow: 4px 4px 19px #ffffff;
@@ -33,12 +35,7 @@ justify-content:center;
 export default function CategoryList() {
   return (
     <ButtonsGrid>
-      <Button>Horror</Button>
-      <Button>Comedy werwer</Button>
-      <Button>Horror</Button>
-      <Button>Comedy</Button>
-      <Button>Horror</Button>
-      <Button>Comedy</Button>
+      {categories.map(obj=><Button key={obj.id}>{obj.name}</Button>)}
     </ButtonsGrid>
   );
 }

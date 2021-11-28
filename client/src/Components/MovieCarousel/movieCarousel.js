@@ -64,7 +64,7 @@ const Carousel = ({images}) => {
       <div className="card-container">
         {images.map(({ thumbnail,id }, index) => (
           <div
-            className="card"
+            className="carousel-card"
             key={index}
             onClick={() => setActive(index)}
             style={getStyle(index)}
