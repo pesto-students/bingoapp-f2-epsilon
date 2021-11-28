@@ -14,19 +14,8 @@ export const movies = [
     title: "The Eternals",
     completed: "23%",
   },
-  {
-    id: 3,
-    thumbnail:
-      "https://www.ubuy.co.in/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvODFIR295TTlhdFMuX1NMMTUwMF8uanBn.jpg",
-    title: "The Nomadland",
-    completed: "13%",
-  },
-  {
-    id: 4,
-    thumbnail: "https://flxt.tmsimg.com/assets/p10592915_p_v10_ad.jpg",
-    title: "Man from U.N.C.L.E",
-    completed: "90%",
-  },
+ 
+
   {
     id: 5,
     thumbnail:

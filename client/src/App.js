@@ -6,6 +6,7 @@ import Footer from "./Parts/Footer/footer";
 import HomePage from "./Pages/HomePage/homePage";
 import MovieDetailPage from "./Pages/MovieDetailPage/movieDetailPage";
 import VideoPlayerPage from "./Pages/videoPlayer/videoPlayerPage";
+import SearchPage from "./Pages/Search/SearchPage";
 import { AuthProvider } from "./Utilities/authContext";
 import AuthRoute from "./Utilities/authRoute";
 import UnauthenticatedRoute from "./Utilities/unauthenticatedRoute";
@@ -55,6 +56,15 @@ function App() {
               element={
                 <AuthRoute>
                   <VideoPlayerPage />
+                </AuthRoute>
+              }
+            />
+            <Route
+              exact
+              path="/search"
+              element={
+                <AuthRoute>
+                  <SearchPage />
                 </AuthRoute>
               }
             />

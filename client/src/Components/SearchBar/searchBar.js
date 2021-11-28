@@ -59,10 +59,10 @@ function SearchBar() {
   };
   return (
     <div ref={wrapperRef} className="flex-container flex-column pos-rel">
-      <div class="ui search">
-        <div class="ui icon input">
+      <div className="ui search">
+        <div className="ui icon input">
           <input
-            class="prompt"
+            className="prompt"
             value={movie}
             onClick={showDisplay}
             type="text"
@@ -71,7 +71,7 @@ function SearchBar() {
               setMovie(event.target.value);
             }}
           />
-          <i class="search icon"></i>
+          <i className="search icon"></i>
         </div>
       </div>
       {display && (
