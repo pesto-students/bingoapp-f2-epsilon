@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+require("mongoose-type-url");
+
 //Model for Movie table
 const Movie = mongoose.model("Movie", {
   name: {
@@ -9,6 +11,7 @@ const Movie = mongoose.model("Movie", {
     type: String,
     required: true,
   },
+  image: { type: mongoose.SchemaTypes.Url, require: true },
   duration: {
     type: Number,
     required: true,
@@ -18,9 +21,10 @@ const Movie = mongoose.model("Movie", {
     required: true,
   },
   year: {
-    type : Date,
+    type: Date,
     default: new Date().getFullYear(),
   },
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
   rating: {
     type: Number,
     default: 0,
