@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const LoginController = require("../controllers/auth-login");
-const AuthController = require("../controllers/user-auth");
+const { checkIfAuthenticated } = require("../controllers/user-auth");
 const MovieController = require("../controllers/movie");
 const CategoryController = require("../controllers/category");
 
-router.post("/api/auth/login", LoginController.loginUser);
+router.post("/api/auth/login", LoginController.createUser);
 
 // Movies Route
-router.get(
-  "/api/movies",
-  AuthController.checkIfAuthenticated,
-  MovieController.movies_all
-);
+router.get("/api/movies", checkIfAuthenticated, MovieController.movies_all);
 
 router.post("/api/movies/add", MovieController.movie_add);
 

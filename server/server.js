@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 var bodyParser = require("body-parser");
-
 const port = process.env.PORT || 8000;
 
 //BLQr0hViTatJw5Hb
@@ -13,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.get('/',(req,res) => {
-    res.send("Silence is Golden");
+app.get("/", (req, res) => {
+  res.send("Silence is Golden");
 });
 
 const connectDB = require("./config/db");
