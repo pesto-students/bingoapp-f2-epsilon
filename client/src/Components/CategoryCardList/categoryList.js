@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { categories } from "../../Utilities";
 
@@ -14,28 +15,40 @@ const Button = styled.button`
   font-size: 20px;
   width: 45%;
   margin: 10px;
-  &:hover{
-    opacity:0.8;
-    cursor:pointer;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }
-  @media (max-width:768px) {
-    width:auto;
-    box-shadow:4px 4px 19px #aea9a9;
+  @media (max-width: 768px) {
+    width: auto;
+    box-shadow: 4px 4px 19px #aea9a9;
   }
 `;
 
 const ButtonsGrid = styled.div`
-display:flex;
-margin:15px 0px;
-flex-wrap:wrap;
-align-items:center;
-justify-content:center;
+  display: flex;
+  margin: 15px 0px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default function CategoryList() {
+  let navigate = useNavigate();
+
+  const onSelectCategories = (event) => {
+    let target = event.target;
+    if (target.tagName === "BUTTON") {
+      navigate(`/search?categories=${target.id}`);
+    }
+  };
   return (
-    <ButtonsGrid>
-      {categories.map(obj=><Button key={obj.id}>{obj.name}</Button>)}
+    <ButtonsGrid onClick={onSelectCategories}>
+      {categories.map((obj) => (
+        <Button key={obj.id} id={obj.name}>
+          {obj.name}
+        </Button>
+      ))}
     </ButtonsGrid>
   );
 }
