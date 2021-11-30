@@ -5,15 +5,7 @@ const { Movie } = require("../models/movie");
 exports.movies_all = (req, res) => {
   Movie.find({}, (err, data) => {
     if (!err) {
-      const response = {
-        count: data.length,
-        movies: data.map((doc) => {
-          return {
-            movie: doc,
-          };
-        }),
-      };
-      res.status(200).json(response);
+      res.status(200).json(data);
     } else {
       console.log(err);
       res.status(500).json({
@@ -32,6 +24,7 @@ exports.movie_add = (req, res) => {
     image: req.body.image,
     duration: req.body.duration,
     language: req.body.language,
+    year: req.body.year,
     categories: req.body.categories,
     rating: req.body.rating,
     artists: req.body.artists,
@@ -74,6 +67,7 @@ exports.movie_update = (req, res) => {
     video_name: req.body.video_name,
     duration: req.body.duration,
     language: req.body.language,
+    year: req.body.year,
     categories: req.body.categories,
     rating: req.body.rating,
     artists: req.body.artists,
@@ -113,5 +107,73 @@ exports.movie_delete = (req, res) => {
         error: err,
       });
     }
+  });
+};
+
+// Search Movies
+exports.movie_search = (req, res) => {
+  Movie.find(
+    {
+      $or: [
+        { name: { $regex: req.params.keyword, $options: "i" } },
+        { artists: { $regex: req.params.keyword, $options: "i" } },
+      ],
+    },
+    function (err, docs) {
+      if (err) {
+        res
+          .status(404)
+          .json({ message: "No valid Movie found for provided Search", err });
+      } else if (docs.length != 0) {
+        res.status(200).json({
+          movie: docs,
+        });
+      } else {
+        Movie.find({}, (err, data) => {
+          if (!err) {
+            var finalData = [];
+            for (var i in data) {
+              if (data[i].categories.length !== 0) {
+                finalData.push(data[i]);
+              }
+            }
+            res.status(200).json({
+              movie: finalData,
+            });
+          } else {
+            console.log(err);
+            res.status(500).json({
+              error: err,
+            });
+          }
+        }).populate({
+          path: "categories",
+          match: { name: { $regex: req.params.keyword, $options: "i" } },
+        });
+      }
+    }
+  ).populate("categories");
+};
+
+// Search Categories
+exports.category_search = (req, res) => {
+  Movie.find({}, (err, data) => {
+    if (!err) {
+      var finalData = [];
+      for (var i in data) {
+        if (data[i].categories.length !== 0) {
+          finalData.push(data[i]);
+        }
+      }
+      res.status(200).json(finalData);
+    } else {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    }
+  }).populate({
+    path: "categories",
+    match: { name: { $regex: req.params.keyword, $options: "i" } },
   });
 };

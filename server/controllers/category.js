@@ -6,15 +6,7 @@ const { Movie } = require("../models/movie");
 exports.categories_all = (req, res) => {
   Category.find({}, (err, data) => {
     if (!err) {
-      const response = {
-        count: data.length,
-        categories: data.map((doc) => {
-          return {
-            category: doc,
-          };
-        }),
-      };
-      res.status(200).json(response);
+      res.status(200).json(data);
     } else {
       console.log(err);
       res.status(500).json({

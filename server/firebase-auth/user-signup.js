@@ -1,4 +1,4 @@
-const { admin } = require("../firebase-auth/firebase-service");
+const { admin } = require("./firebase-service");
 
 exports.createUser = async (req, res) => {
   const { email, password } = req.body;

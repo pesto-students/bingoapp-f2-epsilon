@@ -21,7 +21,7 @@ const Movie = mongoose.model("Movie", {
     required: true,
   },
   year: {
-    type: Date,
+    type: String,
     default: new Date().getFullYear(),
   },
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
