@@ -36,7 +36,8 @@ exports.playlist_add = (req, res) => {
 
 //Showing Dedicated Playlist
 exports.playlist_show = (req, res) => {
-  Playlist.find({ email: req.params.email }, (err, data) => {
+  console.log(req.query.email)
+  Playlist.find({ email: req.query.email }, (err, data) => {
     if (!err) {
       res.status(200).json(data);
     } else {

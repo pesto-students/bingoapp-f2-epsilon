@@ -99,7 +99,7 @@ router.post(
 );
 
 router.get(
-  "/api/playlist/show/:email",
+  "/api/playlist/show/",
   checkIfAuthenticated,
   PlaylistController.playlist_show
 );
