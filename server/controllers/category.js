@@ -40,7 +40,7 @@ exports.category_add = (req, res) => {
 //Display Single Category
 exports.category_show = (req, res) => {
   const id = req.params.id;
-  Category.findOne({ _id: id }, function (err, docs) {
+  Category.findOne({ _id: id }, (err, docs) => {
     if (err) {
       res
         .status(404)

@@ -48,7 +48,7 @@ exports.movie_add = (req, res) => {
 //Display Single Movie
 exports.movie_show = (req, res) => {
   const id = req.params.id;
-  Movie.findOne({ _id: id }, function (err, docs) {
+  Movie.findOne({ _id: id }, (err, docs) => {
     if (err) {
       res.status(404).json({ message: "No valid Movie found for provided ID" });
     } else {
@@ -117,7 +117,7 @@ exports.movie_search = (req, res) => {
         { artists: { $regex: req.params.keyword, $options: "i" } },
       ],
     },
-    function (err, docs) {
+    (err, docs) => {
       if (err) {
         res
           .status(404)

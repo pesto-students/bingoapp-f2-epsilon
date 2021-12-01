@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const { Rating } = require("../models/rating");
 
+// Add new Rating
 exports.rating_add = (req, res) => {
   Rating.find(
     { email: req.body.email, movie_id: req.body.movie_id },
-    function (notFound, found) {
+    (notFound, found) => {
       if (found.length > 0) {
         res.status(200).json({
           message: "You have already given the rating",
@@ -34,6 +35,7 @@ exports.rating_add = (req, res) => {
   );
 };
 
+// Show aggragate Rating
 exports.rating_show = (req, res) => {
   Rating.aggregate(
     [

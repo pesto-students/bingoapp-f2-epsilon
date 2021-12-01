@@ -9,6 +9,7 @@ const { makeUserAdmin } = require("../firebase-auth/admin-user");
 const MovieController = require("../controllers/movie");
 const CategoryController = require("../controllers/category");
 const RatingController = require("../controllers/rating");
+const PlaylistController = require("../controllers/playlist");
 
 router.post("/api/auth/login", LoginController.createUser);
 
@@ -87,6 +88,20 @@ router.get(
   "/api/rating/show",
   checkIfAuthenticated,
   RatingController.rating_show
+);
+
+// Movie Paylist Routes
+
+router.post(
+  "/api/playlist/add",
+  checkIfAuthenticated,
+  PlaylistController.playlist_add
+);
+
+router.get(
+  "/api/playlist/show/:email",
+  checkIfAuthenticated,
+  PlaylistController.playlist_show
 );
 
 module.exports = router;
