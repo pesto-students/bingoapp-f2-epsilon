@@ -25,12 +25,6 @@ const Movie = mongoose.model("Movie", {
     default: new Date().getFullYear(),
   },
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
-  rating: {
-    type: Number,
-    default: 0,
-    min: 0,
-    max: 5,
-  },
   artists: {
     type: String,
     required: true,

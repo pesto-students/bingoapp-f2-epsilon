@@ -8,6 +8,7 @@ const {
 const { makeUserAdmin } = require("../firebase-auth/admin-user");
 const MovieController = require("../controllers/movie");
 const CategoryController = require("../controllers/category");
+const RatingController = require("../controllers/rating");
 
 router.post("/api/auth/login", LoginController.createUser);
 
@@ -32,7 +33,11 @@ router.delete(
   MovieController.movie_delete
 );
 
-router.get("/api/search/:keyword", checkIfAuthenticated, MovieController.movie_search);
+router.get(
+  "/api/search/:keyword",
+  checkIfAuthenticated,
+  MovieController.movie_search
+);
 
 router.get(
   "/api/categories/search/:keyword",
@@ -69,6 +74,19 @@ router.delete(
   "/api/categories/delete/:id",
   checkIfAdmin,
   CategoryController.category_delete
+);
+
+// Movie Rating Routes
+router.post(
+  "/api/rating/add",
+  checkIfAuthenticated,
+  RatingController.rating_add
+);
+
+router.get(
+  "/api/rating/show",
+  checkIfAuthenticated,
+  RatingController.rating_show
 );
 
 module.exports = router;

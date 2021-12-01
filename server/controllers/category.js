@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Category } = require("../models/category");
-const { Movie } = require("../models/movie");
 
 // Getting all Category Data
 exports.categories_all = (req, res) => {

@@ -26,7 +26,6 @@ exports.movie_add = (req, res) => {
     language: req.body.language,
     year: req.body.year,
     categories: req.body.categories,
-    rating: req.body.rating,
     artists: req.body.artists,
     tags: req.body.tags,
   });
@@ -69,7 +68,6 @@ exports.movie_update = (req, res) => {
     language: req.body.language,
     year: req.body.year,
     categories: req.body.categories,
-    rating: req.body.rating,
     artists: req.body.artists,
     tags: req.body.tags,
   };
