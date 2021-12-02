@@ -39,7 +39,13 @@ exports.playlist_show = (req, res) => {
   console.log(req.query.email)
   Playlist.find({ email: req.query.email }, (err, data) => {
     if (!err) {
-      res.status(200).json(data);
+      for (var i in data) {
+      var finalData = [];
+        if (data[i].movie) {
+          finalData.push(data[i]);
+        }
+      }
+      res.status(200).json(finalData);
     } else {
       console.log(err);
       res.status(500).json({

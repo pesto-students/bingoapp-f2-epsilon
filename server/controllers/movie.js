@@ -175,3 +175,28 @@ exports.category_search = (req, res) => {
     match: { name: { $regex: req.params.keyword, $options: "i" } },
   });
 };
+
+// Based on previous watch movies
+exports.movie_based_on_previous_watch = (req, res) => {
+  Movie.find(
+    {
+      $or: [
+        {
+          cast: { $in: ["Dwayne Jhonson"] },
+        },
+        {
+          categories: { $in: ["61a5c7cb5e18357c9117f98c"] },
+        },
+      ],
+    },
+    (err, docs) => {
+      if (!err) {
+        res.status(200).json(docs);
+      } else {
+        res.status(200).json({
+          error: err,
+        });
+      }
+    }
+  );
+};

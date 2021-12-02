@@ -20,6 +20,7 @@ body {
 
 .highlight-text {
   color: #fdf309;
+  text-transform: capitalize;
 }
 .ui.inverted.segment {
   background: revert !important;

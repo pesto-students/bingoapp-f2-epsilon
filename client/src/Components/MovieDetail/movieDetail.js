@@ -103,7 +103,7 @@ function MovieDetail({ data }) {
                   {data.categories && data.categories.length > 0
                     ? data.categories.map((category) => (
                         <span key={category._id} className="highlight-text">
-                          {category.name}
+                          {category.name},
                         </span>
                       ))
                     : ""}
@@ -116,7 +116,7 @@ function MovieDetail({ data }) {
                   {data.cast && data.cast.length > 0
                     ? data.cast.map((cast) => (
                         <span key={cast} className="highlight-text">
-                          {cast}
+                          {cast},
                         </span>
                       ))
                     : ""}

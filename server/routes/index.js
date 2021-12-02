@@ -10,6 +10,7 @@ const MovieController = require("../controllers/movie");
 const CategoryController = require("../controllers/category");
 const RatingController = require("../controllers/rating");
 const PlaylistController = require("../controllers/playlist");
+const BasedOnPreviousWatch = require("../controllers/based_on_previos_watch");
 
 router.post("/api/auth/login", LoginController.createUser);
 
@@ -44,6 +45,12 @@ router.get(
   "/api/categories/search/:keyword",
   checkIfAuthenticated,
   MovieController.category_search
+);
+
+router.get(
+  "/api/movie/previouswatch",
+  checkIfAuthenticated,
+  MovieController.movie_based_on_previous_watch
 );
 
 // Categories Route
@@ -91,7 +98,6 @@ router.get(
 );
 
 // Movie Paylist Routes
-
 router.post(
   "/api/playlist/add",
   checkIfAuthenticated,
@@ -99,9 +105,22 @@ router.post(
 );
 
 router.get(
-  "/api/playlist/show/",
+  "/api/playlist/show",
   checkIfAuthenticated,
   PlaylistController.playlist_show
+);
+
+// Based On Previous Watch Routes
+router.post(
+  "/api/based_on_previous_watch/add",
+  checkIfAuthenticated,
+  BasedOnPreviousWatch.based_on_previous_watch_add
+);
+
+router.get(
+  "/api/based_on_previous_watch/show",
+  checkIfAuthenticated,
+  BasedOnPreviousWatch.based_on_previous_watch_show
 );
 
 module.exports = router;
