@@ -29,10 +29,10 @@ const MovieDetails = styled.div`
 export default function SingleMovieCard({data}) {
   return (
     <CardWrapper>
-        <MovieThumbnail id={data.id} src={data.thumbnail} alt="Ant man" />
+        <MovieThumbnail id={data._id} src={data.image} alt="Ant man" />
       <MovieDetails>
-        <h4>{data.title}</h4>
-        {data.completed && <h4>{data.completed}</h4>}
+        <h4>{data.name}</h4>
+        {/* {data.completed && <h4>{data.completed}</h4>} */}
       </MovieDetails>
     </CardWrapper>
   );

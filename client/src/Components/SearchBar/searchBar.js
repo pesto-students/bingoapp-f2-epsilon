@@ -64,7 +64,11 @@ function SearchBar() {
 
   // input change & debouncing starts
   const toSearchPage = (name) => {
-    navigate(`/search?title=${name}`);
+    if(name){
+      navigate(`/search/title/${name}`);
+    }else{
+      navigate(`/`);
+    }
   };
 
   const debounce = (fn, delay) => {
@@ -75,7 +79,6 @@ function SearchBar() {
       }
       timer = setTimeout(() => {
         timer=null;
-        console.log('args')
         fn(...args);
       }, delay);
     };

@@ -1,11 +1,13 @@
 const express = require("express");
+const cors = require('cors');
 const dotenv = require("dotenv");
 var bodyParser = require("body-parser");
 const port = process.env.PORT || 8000;
 
 //BLQr0hViTatJw5Hb
 const app = express();
-
+app.use(cors());
+app.options('*', cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 

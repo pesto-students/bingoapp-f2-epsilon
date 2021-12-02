@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem('auth_token')
     return auth.signOut();
   }
 

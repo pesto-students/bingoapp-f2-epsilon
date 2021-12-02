@@ -25,7 +25,8 @@ function Login() {
     try {
       setError("");
       setLoading(true);
-      await login(formData.email, formData.password);
+      const data=await login(formData.email, formData.password);
+      localStorage.setItem('auth_token',data.user.ya)
       navigate("/", { replace: true });
     } catch {
       setError("Email or Password is Incorrect");

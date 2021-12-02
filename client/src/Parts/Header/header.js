@@ -41,7 +41,7 @@ function SingleHeader() {
           {currentUser ? (
             <Header size="small" inverted floated="left">
               <Header.Content className="flex">
-                <Dropdown text="Categories" options={headerOptions} />
+                <Dropdown text="Categories" className='invisible' options={headerOptions} />
                 <SearchBar />
               </Header.Content>
             </Header>

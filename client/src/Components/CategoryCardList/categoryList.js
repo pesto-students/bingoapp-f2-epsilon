@@ -15,6 +15,7 @@ const Button = styled.button`
   font-size: 20px;
   width: 45%;
   margin: 10px;
+  text-transform:capitalize;
   &:hover {
     opacity: 0.8;
     cursor: pointer;
@@ -30,25 +31,25 @@ const ButtonsGrid = styled.div`
   margin: 15px 0px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content:flex-start;
 `;
 
-export default function CategoryList() {
+export default function CategoryList({list}) {
   let navigate = useNavigate();
 
   const onSelectCategories = (event) => {
     let target = event.target;
     if (target.tagName === "BUTTON") {
-      navigate(`/search?categories=${target.id}`);
+      navigate(`/search/categories/${target.id}`);
     }
   };
   return (
     <ButtonsGrid onClick={onSelectCategories}>
-      {categories.map((obj) => (
-        <Button key={obj.id} id={obj.name}>
+      {list.length>0?list.map((obj) => (
+        <Button key={obj._id} id={obj.name}>
           {obj.name}
         </Button>
-      ))}
+      )):<p>No data found</p>}
     </ButtonsGrid>
   );
 }

@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+
 import Login from "./Pages/Authentication/login";
 import Register from "./Pages/Authentication/register";
 import SingleHeader from "./Parts/Header/header";
@@ -14,7 +18,6 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 function App() {
-  console.log('location',window.location)
   return (
     <div className="App">
       <Router>
@@ -61,7 +64,7 @@ function App() {
             />
             <Route
               exact
-              path="/search"
+              path="/search/:type/:keyword"
               element={
                 <AuthRoute>
                   <SearchPage />
@@ -82,6 +85,7 @@ function App() {
           <Footer />
         </AuthProvider>
       </Router>
+      <Alert stack={{limit: 3}} />
     </div>
   );
 }
