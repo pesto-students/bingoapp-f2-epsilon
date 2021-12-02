@@ -8,7 +8,7 @@ const BasedOnPreviousWatch = mongoose.model("BasedOnPreviousWatch", {
   },
   categories: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
     },
   ],
   cast: [

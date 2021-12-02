@@ -47,12 +47,6 @@ router.get(
   MovieController.category_search
 );
 
-router.get(
-  "/api/movie/previouswatch",
-  checkIfAuthenticated,
-  MovieController.movie_based_on_previous_watch
-);
-
 // Categories Route
 router.get(
   "/api/categories",
