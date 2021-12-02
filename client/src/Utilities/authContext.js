@@ -27,7 +27,8 @@ export function AuthProvider({ children }) {
   function signInWithGoogle() {
     auth
       .signInWithPopup(googleProvider)
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem('auth_token',res.user.ya)
         window.location.href = "/";
       })
       .catch((error) => {
