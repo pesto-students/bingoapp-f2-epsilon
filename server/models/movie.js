@@ -24,12 +24,19 @@ const Movie = mongoose.model("Movie", {
     type: String,
     default: new Date().getFullYear(),
   },
-  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
-  artists: {
-    type: String,
-    required: true,
-  },
-  tags: {
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
+  ],
+  cast: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  description: {
     type: String,
     required: true,
   },

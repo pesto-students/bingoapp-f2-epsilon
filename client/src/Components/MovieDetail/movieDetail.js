@@ -51,19 +51,19 @@ function MovieDetail({ data }) {
       movie: id,
     });
     Alert.success(data.message, {
-      position: 'top-right',
-      effect: 'slide',
+      position: "top-right",
+      effect: "slide",
       beep: false,
       timeout: 2000,
-      offset: 0
-  });
+      offset: 0,
+    });
   };
 
   return (
     <Segment clearing inverted>
       <Item.Group>
         <Item style={itemStyle}>
-          <Breadcrumbs />
+          <Breadcrumbs data={data} />
           <>
             <Item.Content style={imageStyle}>
               <Link to={`/videos/${data._id}`}>
@@ -81,7 +81,10 @@ function MovieDetail({ data }) {
                   <Button primary>Play Movie</Button>
                 </Link>
                 <div>
-                  <h4 className='cursor' onClick={() => onAddingPlaylist(data._id)}>
+                  <h4
+                    className="cursor"
+                    onClick={() => onAddingPlaylist(data._id)}
+                  >
                     ADD TO WATCHLIST
                   </h4>
                 </div>
@@ -100,7 +103,7 @@ function MovieDetail({ data }) {
                   {data.categories && data.categories.length > 0
                     ? data.categories.map((category) => (
                         <span key={category._id} className="highlight-text">
-                          {category.name}
+                          {category.name},
                         </span>
                       ))
                     : ""}
@@ -109,11 +112,18 @@ function MovieDetail({ data }) {
                   Year: <span className="highlight-text">{data.year}</span>
                 </div>
                 <div>
-                  Artist: <span className="highlight-text">{data.artists}</span>
+                  Cast:{" "}
+                  {data.cast && data.cast.length > 0
+                    ? data.cast.map((cast) => (
+                        <span key={cast} className="highlight-text">
+                          {cast},
+                        </span>
+                      ))
+                    : ""}
                 </div>
               </Item.Meta>
 
-              <Item.Description>Description missing</Item.Description>
+              <Item.Description>{data.description}</Item.Description>
             </Item.Content>
           </>
         </Item>

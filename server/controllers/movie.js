@@ -26,8 +26,8 @@ exports.movie_add = (req, res) => {
     language: req.body.language,
     year: req.body.year,
     categories: req.body.categories,
-    artists: req.body.artists,
-    tags: req.body.tags,
+    cast: req.body.cast,
+    description: req.body.description,
   });
   movie
     .save()
@@ -68,8 +68,8 @@ exports.movie_update = (req, res) => {
     language: req.body.language,
     year: req.body.year,
     categories: req.body.categories,
-    artists: req.body.artists,
-    tags: req.body.tags,
+    cast: req.body.cast,
+    description: req.body.description,
   };
   Movie.findByIdAndUpdate(
     req.params.id,
@@ -114,7 +114,7 @@ exports.movie_search = (req, res) => {
     {
       $or: [
         { name: { $regex: req.params.keyword, $options: "i" } },
-        { artists: { $regex: req.params.keyword, $options: "i" } },
+        { cast: { $regex: req.params.keyword, $options: "i" } },
       ],
     },
     (err, docs) => {
