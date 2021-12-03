@@ -63,7 +63,7 @@ function MovieDetail({ data }) {
     <Segment clearing inverted>
       <Item.Group>
         <Item style={itemStyle}>
-          <Breadcrumbs />
+          <Breadcrumbs data={data} />
           <>
             <Item.Content style={imageStyle}>
               <Link to={`/videos/${data._id}`}>

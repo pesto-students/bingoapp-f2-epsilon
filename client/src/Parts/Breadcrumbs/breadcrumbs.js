@@ -8,12 +8,13 @@ const breadcrumbsStyle = {
   padding: "12px 0",
 };
 
-const sections = [
-  { key: "Home", content: "Home", link: true , href: "/" },
-  { key: "Watch", content: "Watch", link: true , href: "/watch"},
-];
 
-function Breadcrumbs() {
+function Breadcrumbs({data}) {
+  const sections = [
+    { key: "Home", content: "Home", link: true , href: "/" },
+    { key: "Watch", content: "Watch", link: true , href: "/"},
+    { key: data.name, content: data.name, link: true , href: `/watch/${data._id}`},
+  ];
   return (
     <div style={breadcrumbsStyle}>
       <Breadcrumb size="massive" link={sections.redirect} icon="right angle" sections={sections} />
