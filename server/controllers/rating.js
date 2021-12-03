@@ -45,6 +45,7 @@ exports.rating_show = (req, res) => {
           avg_rating: { $avg: "$rating" },
         },
       },
+      { $sort: { avg_rating: -1 } },
     ],
     (err, data) => {
       if (!err) {
