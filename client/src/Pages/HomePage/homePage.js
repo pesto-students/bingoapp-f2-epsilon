@@ -84,10 +84,8 @@ export default function HomePage() {
       email: currentUser.email,
     });
     if (status === 200) {
-      if (data) {
-        const newData = data.map((movie) => movie.movie);
-        setPlayListsData(newData);
-      }
+      const newData = data.map((movie) => movie.movie);
+      setPlayListsData(newData);
     } else {
       navigate("/login");
     }
