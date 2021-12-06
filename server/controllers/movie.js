@@ -3,16 +3,24 @@ const { Movie } = require("../models/movie");
 
 //Getting all Movies Data
 exports.movies_all = (req, res) => {
-  Movie.find({}, (err, data) => {
-    if (!err) {
-      res.status(200).json(data);
-    } else {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+  Movie.paginate(
+    {},
+    {
+      limit: 8,
+      page: req.query.page ? req.query.page : "1",
+      populate: "categories",
+    },
+    (err, data) => {
+      if (!err) {
+        res.status(200).json(data);
+      } else {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
+      }
     }
-  }).populate("categories");
+  );
 };
 
 // Creating a New Movie
@@ -110,47 +118,32 @@ exports.movie_delete = (req, res) => {
 
 // Search Movies
 exports.movie_search = (req, res) => {
-  Movie.find(
+  Movie.paginate(
     {
       $or: [
         { name: { $regex: req.params.keyword, $options: "i" } },
         { cast: { $regex: req.params.keyword, $options: "i" } },
       ],
     },
+    {
+      limit: 8,
+      page: req.query.page ? req.query.page : "1",
+      populate: "categories",
+    },
     (err, docs) => {
       if (err) {
         res
           .status(404)
           .json({ message: "No valid Movie found for provided Search", err });
-      } else if (docs.length != 0) {
+      } else if (docs.docs.length != 0) {
         res.status(200).json({
           movie: docs,
         });
       } else {
-        Movie.find({}, (err, data) => {
-          if (!err) {
-            var finalData = [];
-            for (var i in data) {
-              if (data[i].categories.length !== 0) {
-                finalData.push(data[i]);
-              }
-            }
-            res.status(200).json({
-              movie: finalData,
-            });
-          } else {
-            console.log(err);
-            res.status(500).json({
-              error: err,
-            });
-          }
-        }).populate({
-          path: "categories",
-          match: { name: { $regex: req.params.keyword, $options: "i" } },
-        });
+        res.status(200).json({ message: "No Results Found" });
       }
     }
-  ).populate("categories");
+  );
 };
 
 // Search Categories
@@ -163,7 +156,9 @@ exports.category_search = (req, res) => {
           finalData.push(data[i]);
         }
       }
-      res.status(200).json(finalData);
+      res.status(200).json({
+        movie: finalData,
+      });
     } else {
       console.log(err);
       res.status(500).json({

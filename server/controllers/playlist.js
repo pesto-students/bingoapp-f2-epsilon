@@ -36,21 +36,40 @@ exports.playlist_add = (req, res) => {
 
 //Showing Dedicated Playlist
 exports.playlist_show = (req, res) => {
-  console.log(req.query.email)
-  Playlist.find({ email: req.query.email }, (err, data) => {
-    if (!err) {
-      for (var i in data) {
-      var finalData = [];
-        if (data[i].movie) {
-          finalData.push(data[i]);
+  console.log(req.query.email);
+  Playlist.paginate(
+    { email: req.query.email },
+    {
+      limit: 8,
+      page: req.query.page ? req.query.page : "1",
+      populate: "movie",
+    },
+    (err, data) => {
+      if (!err) {
+        var finalData = [];
+        for (var i in data.docs) {
+          if (data.docs[i].movie != null) {
+            finalData.push(data.docs[i]);
+          }
         }
+        finalData.push({
+          totalDocs: data.totalDocs,
+          limit: data.limit,
+          totalPages: data.totalPages,
+          page: data.page,
+          pagingCounter: data.pagingCounter,
+          hasPrevPage: data.hasPrevPage,
+          hasNextPage: data.hasNextPage,
+          prevPage: data.prevPage,
+          nextPage: data.nextPage,
+        });
+        res.status(200).json(finalData);
+      } else {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       }
-      res.status(200).json(finalData);
-    } else {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
     }
-  }).populate("movie");
+  );
 };

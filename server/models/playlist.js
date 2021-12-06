@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
-//Model for User
-const Playlist = mongoose.model("Playlist", {
+//Model for Playlist
+const myPlaylist = new mongoose.Schema({
   email: {
     type: String,
     required: true,
@@ -9,8 +10,11 @@ const Playlist = mongoose.model("Playlist", {
   movie: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",
-    require: true
+    require: true,
   },
 });
+
+myPlaylist.plugin(mongoosePaginate);
+const Playlist = mongoose.model("Playlist", myPlaylist);
 
 module.exports = { Playlist };

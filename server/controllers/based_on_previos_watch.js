@@ -81,7 +81,7 @@ exports.based_on_previous_watch_show = (req, res) => {
             cast: final_cast_array,
           });
         }
-        Movie.find(
+        Movie.paginate(
           {
             $or: [
               {
@@ -92,6 +92,11 @@ exports.based_on_previous_watch_show = (req, res) => {
               },
             ],
           },
+          {
+            limit: 8,
+            page: req.query.page ? req.query.page : "1",
+            populate: "categories",
+          },
           (err, docs) => {
             if (!err) {
               res.status(200).json(docs);
@@ -101,7 +106,7 @@ exports.based_on_previous_watch_show = (req, res) => {
               });
             }
           }
-        ).populate("categories");
+        );
       } else {
         console.log(err);
         res.status(500).json({

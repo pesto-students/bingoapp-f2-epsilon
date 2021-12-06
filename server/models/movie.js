@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 require("mongoose-type-url");
-
 //Model for Movie table
-const Movie = mongoose.model("Movie", {
+
+const myMovie = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -41,5 +42,8 @@ const Movie = mongoose.model("Movie", {
     required: true,
   },
 });
+
+myMovie.plugin(mongoosePaginate);
+const Movie = mongoose.model("Movie", myMovie);
 
 module.exports = { Movie };
