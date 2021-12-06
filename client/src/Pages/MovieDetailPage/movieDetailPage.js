@@ -7,8 +7,8 @@ import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import MovieDetail from "../../Components/MovieDetail/movieDetail";
 import { movies } from "../../Utilities";
 import Loader from "../../Parts/Loader/loader";
+import { getSingleMovie,getAllMovies, getPreviouslyWatchedMovies } from "../../Services/apiCalls";
 import { useAuth } from "../../Utilities/authContext";
-import { getSingleMovie,getAllMovies } from "../../Services/apiCalls";
 
 const SliderSection = styled.section`
   text-align: left;
@@ -27,6 +27,7 @@ function MovieDetailPage() {
   const [moviesData,setMoviesData]=useState([]);
 
   const { videoId } = useParams();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     getMovieData()
@@ -41,7 +42,7 @@ function MovieDetailPage() {
   }
 
   const getMovies=async()=>{
-    const{data,status}=await getAllMovies()
+    const{data,status}=await getPreviouslyWatchedMovies({email:currentUser.email})
     if(status===200){
       setLoading(false)
       setMoviesData(data)

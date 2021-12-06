@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import CategoryList from "../../Components/CategoryCardList/categoryList";
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import MovieCarousel from "../../Components/MovieCarousel/movieCarousel";
-import { movies, previouslyWatchedMovies, carouselImgs } from "../../Utilities";
 import {
   getAllMovies,
   getPlaylistMovies,
   getAllCategories,
+  getPreviouslyWatchedMovies
 } from "../../Services/apiCalls";
 import Loader from "../../Parts/Loader/loader";
 import { useAuth } from "../../Utilities/authContext";
@@ -60,6 +60,7 @@ export default function HomePage() {
   const [moviesData, setMoviesData] = useState([]);
   const [playListsData, setPlayListsData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [recommendData, setRecommandedData] = useState([]);
 
   const { currentUser } = useAuth();
   let navigate = useNavigate();
@@ -68,6 +69,7 @@ export default function HomePage() {
     getMoviesData();
     getPlaylists();
     getCategories();
+    getRecommandations()
   }, []);
 
   const getMoviesData = async () => {
@@ -86,6 +88,17 @@ export default function HomePage() {
     if (status === 200) {
       const newData = data.map((movie) => movie.movie);
       setPlayListsData(newData);
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const getRecommandations = async () => {
+    const { data, status } = await getPreviouslyWatchedMovies({
+      email: currentUser.email,
+    });
+    if (status === 200) {
+      setRecommandedData(data);
     } else {
       navigate("/login");
     }
@@ -119,12 +132,12 @@ export default function HomePage() {
             </SingleColumn>
           </HeroSection>
           <SliderSection>
-            <h3>Based on previous watch</h3>
-            <MovieSlider data={moviesData} />
             <h3>Newly released movies</h3>
             <MovieSlider data={[...moviesData].reverse()} />
             <h3>My Playlists</h3>
             <MovieSlider data={playListsData} />
+            <h3>Based on previous watch</h3>
+            <MovieSlider data={recommendData} />
           </SliderSection>
         </>
       )}

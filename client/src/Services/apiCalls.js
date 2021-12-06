@@ -57,3 +57,11 @@ export const addToMyPlaylist = (request) => {
     data: request,
   });
 };
+
+export const getPreviouslyWatchedMovies = (request) => {
+  return onApiCall({
+    url: `/api/based_on_previous_watch/show?email=${request.email}`,
+    method: "POST",
+    data: request,
+  });
+};
