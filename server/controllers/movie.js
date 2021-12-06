@@ -148,33 +148,25 @@ exports.movie_search = (req, res) => {
 
 // Search Categories
 exports.category_search = (req, res) => {
-  Movie.paginate(
-    {},
-    {
-      limit: 8,
-      page: req.query.page ? req.query.page : "1",
-      populate: {
-        path: "categories",
-        match: { name: { $regex: req.params.keyword, $options: "i" } },
-      },
-    },
-    (err, data) => {
-      if (!err) {
-        var finalData = [];
-        for (var i in data.docs) {
-          if (data.docs[i].categories.length !== 0) {
-            finalData.push(data.docs[i]);
-          }
+  Movie.find({}, (err, data) => {
+    if (!err) {
+      var finalData = [];
+      for (var i in data) {
+        if (data[i].categories.length !== 0) {
+          finalData.push(data[i]);
         }
-        res.status(200).json({
-          movie: finalData,
-        });
-      } else {
-        console.log(err);
-        res.status(500).json({
-          error: err,
-        });
       }
+      res.status(200).json({
+        movie: finalData,
+      });
+    } else {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     }
-  );
+  }).populate({
+    path: "categories",
+    match: { name: { $regex: req.params.keyword, $options: "i" } },
+  });
 };
