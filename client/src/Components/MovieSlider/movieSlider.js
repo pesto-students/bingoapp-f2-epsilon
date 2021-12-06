@@ -24,6 +24,7 @@ export default function MovieSlider({data}) {
   return (
     <SliderWrapper onClick={onSelectMovie}>
       <ScrollMenu  LeftArrow={<></>} RightArrow={<></>}>
+        {data = data.docs}
         {data.length>0?data.map((movieObj, index) => (
           <SingleMovieCard data={movieObj} key={movieObj._id} />
         )):<p>No data found</p>}
