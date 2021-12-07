@@ -59,10 +59,12 @@ function SearchPage() {
   const getMoviesBasedOnCategories = async (keyword) => {
     const { data, status } = await getCategoriesMovies({ keyword });
     if (status === 200) {
-      setMoviesData(data);
+      setMoviesData(data.movie);
       setLoading(false);
     }
   };
+  
+  const recommendMovies=moviesData && moviesData.docs?moviesData.docs:[]
 
   return (
     <>
@@ -71,10 +73,10 @@ function SearchPage() {
       ) : (
         <div className="container">
           <h4 className="search-h4"> Based on your search....</h4>
-          <p className="search-p">{moviesData.length} matches </p>
+          <p className="search-p">{recommendMovies.length} matches </p>
           <div className="row">
-            {moviesData.length > 0 ? (
-              moviesData.map((item) => (
+            {recommendMovies.length > 0 ? (
+              recommendMovies.map((item) => (
                 <Cards title={item.name} id={item._id} thumbnail={item.image} />
               ))
             ) : (

@@ -1,10 +1,8 @@
 import { onApiCall } from "./CommonApi";
 
-
-
 export const getAllMovies = (request) => {
   return onApiCall({
-    url: `api/movies`,
+    url: `api/movies?page=${request ? request : "1"}`,
     method: "GET",
     data: request,
   });
@@ -12,7 +10,9 @@ export const getAllMovies = (request) => {
 
 export const getPlaylistMovies = (request) => {
   return onApiCall({
-    url: `/api/playlist/show?email=${request.email}`,
+    url: `/api/playlist/show?email=${request.email}&page=${
+      request.page ? request.page : "1"
+    }`,
     method: "GET",
     data: request,
   });
@@ -60,8 +60,9 @@ export const addToMyPlaylist = (request) => {
 
 export const getPreviouslyWatchedMovies = (request) => {
   return onApiCall({
-    url: `/api/based_on_previous_watch/show?email=${request.email}`,
-    method: "POST",
+    url: `/api/based_on_previous_watch/show?email=${request.email}&page=${
+      request.page ? request.page : "1"}`,
+    method: "GET",
     data: request,
   });
 };

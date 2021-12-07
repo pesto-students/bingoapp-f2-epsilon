@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import $ from 'jquery'
 
 import MovieSlider from "../../Components/MovieSlider/movieSlider";
 import MovieDetail from "../../Components/MovieDetail/movieDetail";
@@ -49,6 +50,37 @@ function MovieDetailPage() {
     }
   }
 
+
+  const onScroll = (cls) => {
+    var $elem = $(cls);
+    var newScrollLeft = $elem.scrollLeft(),
+      width = $elem.width(),
+      scrollWidth = $elem.get(0).scrollWidth;
+    var offset = 0;
+    if (scrollWidth - newScrollLeft - width < 0.4) {
+      getPreviousMoviesNextPage();
+    }
+  };
+
+  const getPreviousMoviesNextPage =async () => {
+    const { hasNextPage, page } = moviesData;
+    if (hasNextPage) {
+      const { data, status } = await getPreviouslyWatchedMovies({
+        email: currentUser.email,
+        page:page+1
+      });
+      if (status === 200) {
+        let arr=[...moviesData.docs]
+        arr.push(...data.docs)
+        const newData={...data,docs:arr}
+        console.log('newData',newData)
+        setMoviesData(newData);
+      } 
+    }
+  };
+
+
+  const recommendMovies=moviesData && moviesData.docs?moviesData.docs:[]
   return (
     <PageWrapper>
       {loading ? (
@@ -58,7 +90,10 @@ function MovieDetailPage() {
           <MovieDetail data={movieData} />
           <SliderSection>
             <h3>Recommended</h3>
-            <MovieSlider data={moviesData} />
+            <MovieSlider  
+            classname="previous-detail-movies"
+            onScroll={() => onScroll(".previous-detail-movies")}
+            data={recommendMovies} />
           </SliderSection>
         </>
       )}

@@ -52,7 +52,7 @@ exports.playlist_show = (req, res) => {
             finalData.push(data.docs[i]);
           }
         }
-        finalData.push({
+        let finalObj={
           totalDocs: data.totalDocs,
           limit: data.limit,
           totalPages: data.totalPages,
@@ -62,8 +62,9 @@ exports.playlist_show = (req, res) => {
           hasNextPage: data.hasNextPage,
           prevPage: data.prevPage,
           nextPage: data.nextPage,
-        });
-        res.status(200).json(finalData);
+          docs:finalData
+        }
+        res.status(200).json(finalObj);
       } else {
         console.log(err);
         res.status(500).json({
