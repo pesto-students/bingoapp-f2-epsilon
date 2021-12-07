@@ -104,6 +104,12 @@ router.get(
   PlaylistController.playlist_show
 );
 
+router.delete(
+  "/api/playlist/delete/:id",
+  checkIfAuthenticated,
+  PlaylistController.playlist_delete
+);
+
 // Based On Previous Watch Routes
 router.post(
   "/api/based_on_previous_watch/add",

@@ -74,3 +74,18 @@ exports.playlist_show = (req, res) => {
     }
   );
 };
+
+exports.playlist_delete = (req, res) => {
+  Playlist.findByIdAndRemove(req.params.id, (err, data) => {
+    if (!err) {
+      res
+        .status(200)
+        .json({ code: 200, message: "Playlist Item Deleted deleted", deletePlaylist: data });
+    } else {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    }
+  });
+};

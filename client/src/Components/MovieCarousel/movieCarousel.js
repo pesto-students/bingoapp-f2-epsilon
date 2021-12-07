@@ -70,9 +70,9 @@ const Carousel = ({images}) => {
             style={getStyle(index)}
           >
           {activeIndex===index?<Link to={`/watch/${_id}`}>
-            <img src={image} />
+            <img src={image} alt=""/>
           </Link>:
-            <img src={image} />
+            <img src={image} alt=""/>
           }
           </div>
         ))}
