@@ -1,0 +1,39 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  api:
+    host: localhost
+    paths: ['/api','/api/*']
+serviceEndpoints:
+  server:
+    url: 'http://localhost:8000'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+  - auth
+pipelines:
+  default:
+    apiEndpoints:
+      - api
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - auth:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: server 
+              changeOrigin: true
+      
