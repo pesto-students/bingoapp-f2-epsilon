@@ -37,6 +37,19 @@ exports.movie_detail_show = (req, res) => {
   res.sendFile(reqPath + "/stream/front/video.html");
 };
 
+exports.movies_detail_json = (req, res) => {
+  const id = req.params.id;
+  Movie.findOne({ _id: id }, (err, docs) => {
+    if (err) {
+      res.status(404).json({ message: "No valid Movie found for provided ID" });
+    } else {
+      res.status(200).json({
+        movie: docs,
+      });
+    }
+  });
+};
+
 exports.movie_stream = (req, res) => {
   const id = req.params.id;
   Movie.findOne({ _id: id }, (err, docs) => {

@@ -28,6 +28,12 @@
       const url = window.location.href;
       const lastSegment = url.split("/").pop();
       const video = (id) => {
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", `/moviedetailjson/${id}`, false);
+        xhttp.send();
+        const video = JSON.parse(xhttp.responseText);
+
         const x = `
         <video id="videoPlayer" width="650" controls muted="muted" autoplay>
           <source src="/movies/${id}" type="video/mp4" />
