@@ -7,30 +7,30 @@ const PlaylistController = require("../controllers/playlist");
 const BasedOnPreviousWatch = require("../controllers/based_on_previos_watch");
 
 // Movies Route
-router.post("/api/movies/add", MovieController.movie_add);
+router.post("/write/movies/add", MovieController.movie_add);
 
-router.put("/api/movies/update/:id", MovieController.movie_update);
+router.put("/write/movies/update/:id", MovieController.movie_update);
 
-router.delete("/api/movies/delete/:id", MovieController.movie_delete);
+router.delete("/write/movies/delete/:id", MovieController.movie_delete);
 
 // Categories Route
-router.post("/api/categories/add", CategoryController.category_add);
+router.post("/write/categories/add", CategoryController.category_add);
 
-router.put("/api/categories/update/:id", CategoryController.category_update);
+router.put("/write/categories/update/:id", CategoryController.category_update);
 
-router.delete("/api/categories/delete/:id", CategoryController.category_delete);
+router.delete("/write/categories/delete/:id", CategoryController.category_delete);
 
 // Movie Rating Routes
-router.post("/api/rating/add", RatingController.rating_add);
+router.post("/write/rating/add", RatingController.rating_add);
 
 // Movie Paylist Routes
-router.post("/api/playlist/add", PlaylistController.playlist_add);
+router.post("/write/playlist/add", PlaylistController.playlist_add);
 
-router.delete("/api/playlist/delete/:id", PlaylistController.playlist_delete);
+router.delete("/write/playlist/delete/:id", PlaylistController.playlist_delete);
 
 // Based On Previous Watch Routes
 router.post(
-  "/api/based_on_previous_watch/add",
+  "/write/based_on_previous_watch/add",
   BasedOnPreviousWatch.based_on_previous_watch_add
 );
 

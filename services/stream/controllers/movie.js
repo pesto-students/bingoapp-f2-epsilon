@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Movie } = require("../models/movie");
 const fs = require("fs");
 const path = require("path");
-let reqPath = path.join(__dirname, "../../");
+let reqPath = path.join(__dirname, "../../../");
 
 //Getting all Movies Data
 exports.movies_all = (req, res) => {
@@ -34,7 +34,7 @@ exports.movie_show = (req, res) => {
 
 // Movie Detail Page
 exports.movie_detail_show = (req, res) => {
-  res.sendFile(reqPath + "/stream/front/video.html");
+  res.sendFile(reqPath + "/services/stream/front/video.html");
 };
 
 exports.movies_detail_json = (req, res) => {
