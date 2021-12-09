@@ -7,7 +7,7 @@ const PlaylistController = require("../controllers/playlist");
 const BasedOnPreviousWatch = require("../controllers/based_on_previos_watch");
 
 // Movies Route
-router.get("/api/movies", MovieController.movies_all);
+router.get("/read/movies", MovieController.movies_all);
 
 router.get("/api/movies/:id", MovieController.movie_show);
 

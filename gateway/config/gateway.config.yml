@@ -7,9 +7,14 @@ apiEndpoints:
   api:
     host: localhost
     paths: ['/api','/api/*']
+  read:
+    host: localhost
+    paths: ['/read','/read/*']
 serviceEndpoints:
   server:
     url: 'http://localhost:8000'
+  readService:
+    url: 'http://localhost:8001'
 policies:
   - basic-auth
   - cors
@@ -35,5 +40,16 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: server 
+              changeOrigin: true
+  readPipeline:
+    apiEndpoints:
+      - read
+    policies:
+      - auth:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: readService
               changeOrigin: true
       
