@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require("dotenv");
 var bodyParser = require("body-parser");
 const port = process.env.PORT || 8001;
-
+require('./initRedis')
 //BLQr0hViTatJw5Hb
 const app = express();
 app.use(cors());

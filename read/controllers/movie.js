@@ -1,41 +1,57 @@
 const mongoose = require("mongoose");
 const { Movie } = require("../models/movie");
+const client = require("../initRedis");
 
 //Getting all Movies Data
-exports.movies_all = (req, res) => {
-  Movie.paginate(
-    {},
-    {
-      limit: 8,
-      page: req.query.page ? req.query.page : "1",
-      populate: "categories",
-    },
-    (err, data) => {
-      if (!err) {
-        res.status(200).json(data);
-      } else {
-        console.log(err);
-        res.status(500).json({
-          error: err,
-        });
+exports.movies_all = async (req, res) => {
+  let pageNum = req.query.page ? req.query.page : "1";
+  let searchTerm = `movies_all/page/${pageNum}`;
+  const value = await client.get(searchTerm);
+  if (value) {
+    res.status(200).json(JSON.parse(value));
+  } else {
+    Movie.paginate(
+      {},
+      {
+        limit: 8,
+        page: pageNum,
+        populate: "categories",
+      },
+      async (err, data) => {
+        if (!err) {
+          res.status(200).json(data);
+          await client.set(searchTerm, JSON.stringify(data));
+        } else {
+          console.log(err);
+          res.status(500).json({
+            error: err,
+          });
+        }
       }
-    }
-  );
+    );
+  }
 };
 
-
 //Display Single Movie
-exports.movie_show = (req, res) => {
+exports.movie_show =async (req, res) => {
   const id = req.params.id;
-  Movie.findOne({ _id: id }, (err, docs) => {
-    if (err) {
-      res.status(404).json({ message: "No valid Movie found for provided ID" });
-    } else {
-      res.status(200).json({
-        movie: docs,
-      });
-    }
-  }).populate("categories");
+  let searchTerm = `movie_show/${id}`;
+  const value = await client.get(searchTerm);
+  if (value) {
+    res.status(200).json(JSON.parse(value));
+  }else{
+    Movie.findOne({ _id: id },async (err, docs) => {
+      if (err) {
+        res.status(404).json({ message: "No valid Movie found for provided ID" });
+      } else {
+        res.status(200).json({
+          movie: docs,
+        });
+        await client.set(searchTerm, JSON.stringify({movie:docs}));
+      }
+    }).populate("categories");
+  }
+  
 };
 
 // Search Movies
@@ -69,26 +85,33 @@ exports.movie_search = (req, res) => {
 };
 
 // Search Categories
-exports.category_search = (req, res) => {
-  Movie.find({}, (err, data) => {
-    if (!err) {
-      var finalData = [];
-      for (var i in data) {
-        if (data[i].categories.length !== 0) {
-          finalData.push(data[i]);
+exports.category_search = async(req, res) => {
+  const searchTerm=`category_search:${req.params.keyword}`
+  const value = await client.get(searchTerm);
+  if (value) {
+    res.status(200).json(JSON.parse(value));
+  }else{
+    Movie.find({}, async(err, data) => {
+      if (!err) {
+        var finalData = [];
+        for (var i in data) {
+          if (data[i].categories.length !== 0) {
+            finalData.push(data[i]);
+          }
         }
+        res.status(200).json({
+          movie: finalData,
+        });
+        await client.set(searchTerm, JSON.stringify({movie:finalData}));
+      } else {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       }
-      res.status(200).json({
-        movie: finalData,
-      });
-    } else {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    }
-  }).populate({
-    path: "categories",
-    match: { name: { $regex: req.params.keyword, $options: "i" } },
-  });
+    }).populate({
+      path: "categories",
+      match: { name: { $regex: req.params.keyword, $options: "i" } },
+    });
+  }
 };
