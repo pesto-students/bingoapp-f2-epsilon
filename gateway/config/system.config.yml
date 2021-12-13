@@ -6,7 +6,7 @@ db:
 
 plugins:
    auth:
-     package: '/Users/shubhamaggarwal/Documents/pesto/bingoapp/gateway/plugins/auth/manifest.js'
+     package: './plugins/auth/manifest.js'
 
 crypto:
   cipherKey: sensitiveKey

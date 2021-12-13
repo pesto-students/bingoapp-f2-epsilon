@@ -7,9 +7,24 @@ apiEndpoints:
   api:
     host: localhost
     paths: ['/api','/api/*']
+  read:
+    host: localhost
+    paths: ['/read','/read/*']
+  write:
+    host: localhost
+    paths: ['/write','/write/*']
+  stream:
+    host: localhost
+    paths: ['/stream','/stream/*']
 serviceEndpoints:
   server:
     url: 'http://localhost:8000'
+  readService:
+    url: 'http://localhost:8001'
+  writeService:
+    url: 'http://localhost:8002'
+  streamService:
+    url: 'http://localhost:8003'
 policies:
   - basic-auth
   - cors
@@ -36,4 +51,36 @@ pipelines:
           - action:
               serviceEndpoint: server 
               changeOrigin: true
-      
+  readPipeline:
+    apiEndpoints:
+      - read
+    policies:
+      - auth:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: readService
+              changeOrigin: true
+  writePipeline:
+    apiEndpoints:
+      - read
+    policies:
+      - auth:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: writeService
+              changeOrigin: true
+  streamPipeline:
+    apiEndpoints:
+      - stream
+    policies:
+      - auth:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: streamService
+              changeOrigin: true

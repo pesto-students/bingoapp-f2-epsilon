@@ -30,13 +30,13 @@
       const video = (id) => {
         const xhttp = new XMLHttpRequest();
 
-        xhttp.open("GET", `/moviedetailjson/${id}`, false);
+        xhttp.open("GET", `/stream/moviedetailjson/${id}`, false);
         xhttp.send();
         const video = JSON.parse(xhttp.responseText);
 
         const x = `
         <video id="videoPlayer" width="650" controls muted="muted" autoplay>
-          <source src="/movies/${id}" type="video/mp4" />
+          <source src="/stream/movies/${id}" type="video/mp4" />
         </video>
         `;
         document.getElementById("video").innerHTML =
