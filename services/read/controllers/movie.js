@@ -6,6 +6,7 @@ const client = require("../initRedis");
 exports.movies_all = async (req, res) => {
   let pageNum = req.query.page ? req.query.page : "1";
   let searchTerm = `movies_all/page/${pageNum}`;
+  console.log("movies all",req)
   const value = await client.get(searchTerm);
   if (value) {
     res.status(200).json(JSON.parse(value));

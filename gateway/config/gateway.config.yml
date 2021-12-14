@@ -4,9 +4,6 @@ admin:
   port: 9876
   host: localhost
 apiEndpoints:
-  api:
-    host: localhost
-    paths: ['/api','/api/*']
   read:
     host: localhost
     paths: ['/read','/read/*']
@@ -17,8 +14,6 @@ apiEndpoints:
     host: localhost
     paths: ['/stream','/stream/*']
 serviceEndpoints:
-  server:
-    url: 'http://localhost:8000'
   readService:
     url: 'http://localhost:8001'
   writeService:
@@ -38,7 +33,7 @@ policies:
 pipelines:
   default:
     apiEndpoints:
-      - api
+      - read
     policies:
       - cors:
           - action:
@@ -49,7 +44,7 @@ pipelines:
               baseUrl: 'http://example.com'
       - proxy:
           - action:
-              serviceEndpoint: server 
+              serviceEndpoint: readService 
               changeOrigin: true
   readPipeline:
     apiEndpoints:
