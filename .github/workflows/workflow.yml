@@ -28,7 +28,7 @@ jobs:
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: 'bingomoviesapp'
+          AWS_S3_BUCKET: 'bingo-app'
           AWS_ACCESS_KEY_ID: 'AKIAYEPRR2X6VMRTCXIT'
           AWS_SECRET_ACCESS_KEY: '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'
           AWS_REGION: 'ap-south-1'
