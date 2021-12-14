@@ -5,7 +5,7 @@ on:
     branches:
       - "master"
 
-job:
+jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -13,7 +13,7 @@ job:
       matrix:
         node-version: [15.x]
 
-    step:
+    steps:
       - uses: actions/checkout@v1
       - name: Install dependencies
         run: npm install
