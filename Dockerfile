@@ -8,7 +8,7 @@ LABEL "com.github.actions.color"="green"
 LABEL version="0.5.1"
 LABEL repository="https://github.com/shubhamfullstack/bingoapp"
 LABEL homepage="https://bingoapp.is/"
-LABEL maintainer="Moahammed Bhanpurawala <mbhanpurawala22@gmail.com>"
+LABEL maintainer="Nagaranjan <ng592910@gmail.com>"
 
 # https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst
 ENV AWSCLI_VERSION='1.18.14'
