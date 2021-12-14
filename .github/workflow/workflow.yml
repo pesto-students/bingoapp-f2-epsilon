@@ -1,0 +1,23 @@
+name: Client CI
+
+on:
+  push:
+    branches:
+      - "master"
+
+job:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    step:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: npm install
+        working-directory: client
+      - name: Make Build
+        run: npm run build
+        working-directory: client
