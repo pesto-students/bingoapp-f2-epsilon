@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { categories } from "../../Utilities";
 
-const Button = styled.button`
+const Button =  styled.button`
   background: linear-gradient(180deg, #3c3c43 0%, rgba(60, 60, 67, 0) 100%);
   box-shadow: 4px 4px 19px #ffffff;
   outline: none;
