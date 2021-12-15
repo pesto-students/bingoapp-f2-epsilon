@@ -24,7 +24,7 @@ jobs:
           CI: false
         working-directory: client
       - name: serverless deploy s3
-        uses: shubhamfullstack/bingoapp@master
+        uses: pesto-students/bingoapp-f2-epsilon@master
         with:
           args: --acl public-read --follow-symlinks --delete
         env:

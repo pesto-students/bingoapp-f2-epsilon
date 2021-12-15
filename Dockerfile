@@ -6,7 +6,7 @@ LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="green"
 
 LABEL version="0.5.1"
-LABEL repository="https://github.com/shubhamfullstack/bingoapp"
+LABEL repository="https://github.com/pesto-students/bingoapp-f2-epsilon"
 LABEL homepage="https://bingoapp.is/"
 LABEL maintainer="Nagaranjan <ng592910@gmail.com>"
 
