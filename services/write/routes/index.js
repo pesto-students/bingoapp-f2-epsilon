@@ -7,18 +7,18 @@ const PlaylistController = require("../controllers/playlist");
 const BasedOnPreviousWatch = require("../controllers/based_on_previos_watch");
 
 // Movies Route
-router.post("/write/movies/add", MovieController.movie_add);
+router.post("/admin/movies/add", MovieController.movie_add);
 
-router.put("/write/movies/update/:id", MovieController.movie_update);
+router.put("/admin/movies/update/:id", MovieController.movie_update);
 
-router.delete("/write/movies/delete/:id", MovieController.movie_delete);
+router.delete("/admin/movies/delete/:id", MovieController.movie_delete);
 
 // Categories Route
-router.post("/write/categories/add", CategoryController.category_add);
+router.post("/admin/categories/add", CategoryController.category_add);
 
-router.put("/write/categories/update/:id", CategoryController.category_update);
+router.put("/admin/categories/update/:id", CategoryController.category_update);
 
-router.delete("/write/categories/delete/:id", CategoryController.category_delete);
+router.delete("/admin/categories/delete/:id", CategoryController.category_delete);
 
 // Movie Rating Routes
 router.post("/write/rating/add", RatingController.rating_add);
