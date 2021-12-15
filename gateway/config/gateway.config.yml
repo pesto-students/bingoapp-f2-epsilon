@@ -10,6 +10,9 @@ apiEndpoints:
   write:
     host: localhost
     paths: ['/write','/write/*']
+  admin:
+    host: localhost
+    paths: ['/admin','/admin/*']
   stream:
     host: localhost
     paths: ['/stream','/stream/*']
@@ -17,6 +20,8 @@ serviceEndpoints:
   readService:
     url: 'http://localhost:8001'
   writeService:
+    url: 'http://localhost:8002'
+  adminService:
     url: 'http://localhost:8002'
   streamService:
     url: 'http://localhost:8003'
@@ -30,6 +35,7 @@ policies:
   - proxy
   - rate-limit
   - auth
+  - admin
 pipelines:
   default:
     apiEndpoints:
@@ -46,20 +52,9 @@ pipelines:
           - action:
               serviceEndpoint: readService 
               changeOrigin: true
-  readPipeline:
-    apiEndpoints:
-      - read
-    policies:
-      - auth:
-          - action:
-              baseUrl: 'http://example.com'
-      - proxy:
-          - action:
-              serviceEndpoint: readService
-              changeOrigin: true
   writePipeline:
     apiEndpoints:
-      - read
+      - write
     policies:
       - auth:
           - action:
@@ -67,6 +62,17 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: writeService
+              changeOrigin: true
+  adminPipeline:
+    apiEndpoints:
+      - admin
+    policies:
+      - admin:
+          - action:
+              baseUrl: 'http://example.com'
+      - proxy:
+          - action:
+              serviceEndpoint: adminService
               changeOrigin: true
   streamPipeline:
     apiEndpoints:
