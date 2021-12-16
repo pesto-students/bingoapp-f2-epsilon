@@ -67,6 +67,10 @@ pipelines:
     apiEndpoints:
       - admin
     policies:
+      - cors:
+        - action:
+            origin: '*'
+            methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - admin:
           - action:
               baseUrl: 'http://example.com'
