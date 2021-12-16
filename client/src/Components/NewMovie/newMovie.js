@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ const Uploader = styled.img`
 const UploadWrapper = styled.div`
   max-width: 565px;
   text-align: center;
-  padding:2rem 10px;
+  padding: 2rem 10px;
 `;
 const Input = styled.input`
   position: absolute;
@@ -31,17 +31,30 @@ const InputWrapper = styled.div`
   width: 500px;
 `;
 const Header = styled.h3`
-text-align:left;
+  text-align: left;
 `;
-
-// const initState={
-//   obj_content:'',
-// }
+const FormWrapper = styled.div`
+  margin: 20px 0;
+  min-width: 300px;
+`;
+const initState={
+    name: '',
+    video_name: '',
+    image: '',
+    duration: '',
+    language: '',
+    year: '',
+    categories: '',
+    cast: '',
+    description: '',
+}
 export default function NewMovie() {
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState("");
-
+  const [movie, setMovie] = useState("");
+  const [movieObj, setMovieObj] = useState(initState);
+  const [isUploaded, setUploaded] = useState(false);
 
   const pickVideo = (event) => {
     setVideo(event.target.files[0]);
@@ -52,16 +65,22 @@ export default function NewMovie() {
     const formdata = new FormData();
     formdata.append("video_name", video, video.name);
     const { data, status } = await uploadObject(formdata);
+    if (status === 200) {
+      if (data.status === 1) {
+        setMovie(data.location);
+        setUploaded(true);
+        setLoading(false);
+      }
+    }
     // if (status === 200) onUploaded(data);
   };
 
-  const onUploaded = (data) => {
-    
-  };
+  const onUploaded = (data) => {};
 
   return (
-      <UploadWrapper>
+    <UploadWrapper>
       <Header>Upload a Movie</Header>
+      {!isUploaded ? (
         <InputWrapper>
           <Input
             type="file"
@@ -69,17 +88,26 @@ export default function NewMovie() {
             accept="video/mp4"
             onChange={pickVideo}
           />
-          <Uploader
-            src={video ? URL.createObjectURL(video) : UploadIcon}
+          {video?<Uploader
+            src={UploadIcon}
             alt="uploader logo"
-          />
+          />:''}
         </InputWrapper>
-        {formErrors && <ErrorField err={formErrors} />}
-        {video?loading ? (
+      ) : (
+        <FormWrapper>
+
+        </FormWrapper>
+      )}
+      {formErrors && <ErrorField err={formErrors} />}
+      {video ? (
+        loading ? (
           <div>Loading</div>
         ) : (
-          <Button  width="auto" name="Upload" onClick={uploadVideo} />
-        ):''}
-      </UploadWrapper>
+          <Button width="auto" name="Upload" onClick={uploadVideo} />
+        )
+      ) : (
+        ""
+      )}
+    </UploadWrapper>
   );
 }

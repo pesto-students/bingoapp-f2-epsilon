@@ -12,7 +12,7 @@ const FormWrapper = styled.div`
   min-width: 300px;
 `;
 const Header = styled.h3``;
-export default function NewCtegory() {
+export default function NewCtegory(props) {
   const [name, setName] = useState("");
 
   const onInputChange=(e)=>{
@@ -23,6 +23,9 @@ export default function NewCtegory() {
     if(!name)
     return;
     const{data,status}=await addNewCategory({name})
+    if(status===200 || status===201){
+        props.success()
+    }
   }
 
   return (

@@ -14,6 +14,8 @@ exports.video_upload = (req, res) => {
       console.log(result,"reslut");
       res.status(201).json({
         message: "Video uploaded successfully",
+        status:1,
+        location:req.file.location
       });
     })
     .catch((err) => {

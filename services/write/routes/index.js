@@ -17,7 +17,6 @@ router.delete("/admin/movies/delete/:id", MovieController.movie_delete);
 // Categories Route
 router.post("/admin/categories/add", CategoryController.category_add);
 
-router.post("/write/video/upload", uploadS3.single("video_name"), VideoController.video_upload);
 
 router.put("/write/categories/update/:id", CategoryController.category_update);
 
@@ -42,5 +41,7 @@ router.post(
   "/write/based_on_previous_watch/add",
   BasedOnPreviousWatch.based_on_previous_watch_add
 );
+
+router.post("/admin/video/upload", uploadS3.single("video_name"), VideoController.video_upload);
 
 module.exports = router;

@@ -79,7 +79,7 @@ export const getPreviouslyWatchedMovies = (request) => {
 
 export const uploadObject = (formdata) => {
   return onApiCall({
-    url: `/write/video/upload`,
+    url: `/admin/video/upload`,
     method: "POST",
     data: formdata,
     isFileUpload:true,

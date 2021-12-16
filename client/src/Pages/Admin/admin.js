@@ -95,6 +95,11 @@ export default function AdminPage() {
     onOpenModal();
   };
 
+  const onUpdateCategoryTable=async()=>{
+      onCloseModal()
+      getCategories()
+  }
+
   return (
     <PageWrapper>
       {loading ? (
@@ -114,7 +119,7 @@ export default function AdminPage() {
         </>
       )}
       <Modal showCloseIcon={false} open={open} onClose={onCloseModal} center>
-        {isMovie?<NewMovie/>:<NewCtegory />}
+        {isMovie?<NewMovie/>:<NewCtegory  success={onUpdateCategoryTable} />}
       </Modal>
     </PageWrapper>
   );
