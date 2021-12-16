@@ -18,9 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: gateway
-        env:
-          CI: false
-        working-directory: gateway
       - name: serverless deploy s3
         uses: pesto-students/bingoapp-f2-epsilon@master
         with:
