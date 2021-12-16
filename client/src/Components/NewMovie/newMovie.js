@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
+import "video-react/dist/video-react.css";
+import {
+  Player,
+  ControlBar,
+  PlaybackRateMenuButton,
+  ForwardControl,
+  ReplayControl,
+} from "video-react";
 
 import { uploadObject } from "../../Services/apiCalls";
 import Button from "../Button/button";
 import UploadIcon from "../../assets/uploadImg.png";
 import ErrorField from "../ErrorField/errorField";
+import NewMetaData from "../NewMetaData/newMetaData";
+
 const Uploader = styled.img`
   cursor: pointer;
   width: 100%;
@@ -37,23 +47,12 @@ const FormWrapper = styled.div`
   margin: 20px 0;
   min-width: 300px;
 `;
-const initState={
-    name: '',
-    video_name: '',
-    image: '',
-    duration: '',
-    language: '',
-    year: '',
-    categories: '',
-    cast: '',
-    description: '',
-}
+
 export default function NewMovie() {
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState("");
   const [movie, setMovie] = useState("");
-  const [movieObj, setMovieObj] = useState(initState);
   const [isUploaded, setUploaded] = useState(false);
 
   const pickVideo = (event) => {
@@ -65,7 +64,7 @@ export default function NewMovie() {
     const formdata = new FormData();
     formdata.append("video_name", video, video.name);
     const { data, status } = await uploadObject(formdata);
-    if (status === 200) {
+    if (status === 201) {
       if (data.status === 1) {
         setMovie(data.location);
         setUploaded(true);
@@ -80,7 +79,7 @@ export default function NewMovie() {
   return (
     <UploadWrapper>
       <Header>Upload a Movie</Header>
-      {!isUploaded ? (
+      {isUploaded ? (
         <InputWrapper>
           <Input
             type="file"
@@ -88,25 +87,30 @@ export default function NewMovie() {
             accept="video/mp4"
             onChange={pickVideo}
           />
-          {video?<Uploader
-            src={UploadIcon}
-            alt="uploader logo"
-          />:''}
+          {!video ? (
+            <Uploader src={UploadIcon} alt="uploader logo" />
+          ) : (
+            <Player playsInline controls src={URL.createObjectURL(video)}>
+              <ControlBar>
+                <ReplayControl seconds={5} order={2.1} />
+                <ForwardControl seconds={5} order={3.1} />
+                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} />
+              </ControlBar>
+            </Player>
+          )}
+          {formErrors && <ErrorField err={formErrors} />}
+          {video ? (
+            loading ? (
+              <div>Loading</div>
+            ) : (
+              <Button width="auto" name="Upload" onClick={uploadVideo} />
+            )
+          ) : (
+            ""
+          )}
         </InputWrapper>
       ) : (
-        <FormWrapper>
-
-        </FormWrapper>
-      )}
-      {formErrors && <ErrorField err={formErrors} />}
-      {video ? (
-        loading ? (
-          <div>Loading</div>
-        ) : (
-          <Button width="auto" name="Upload" onClick={uploadVideo} />
-        )
-      ) : (
-        ""
+        <NewMetaData />
       )}
     </UploadWrapper>
   );
