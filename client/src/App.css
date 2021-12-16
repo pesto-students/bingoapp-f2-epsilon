@@ -51,6 +51,9 @@ body {
     display: none !important;
   }
 }
+.ui.header{
+  font-weight: revert;
+}
 .ui.dropdown .menu {
   z-index: 999;
 }
@@ -117,4 +120,8 @@ body {
 
 .flex-column {
   flex-direction: column;
+}
+.ui.huge.header {
+  min-height: 1em;
+  font-size: 2em;
 }
