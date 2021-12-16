@@ -95,7 +95,7 @@ function App() {
           <Footer />
         </AuthProvider>
       </Router>
-      <Alert stack={{limit: 3}} />
+      <Alert stack={{ limit: 3 }} />
     </div>
   );
 }

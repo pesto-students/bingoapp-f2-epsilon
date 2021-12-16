@@ -35,7 +35,7 @@ function SingleHeader() {
         <Container>
           <Link to="/">
             <Header size="huge" id="logo-font" inverted floated="left">
-              Bingo
+              BINGO
             </Header>
           </Link>
           {currentUser ? (
