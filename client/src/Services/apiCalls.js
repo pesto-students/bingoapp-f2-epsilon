@@ -26,6 +26,15 @@ export const getAllCategories = (request) => {
   });
 };
 
+export const addNewCategory = (request) => {
+  return onApiCall({
+    url: `/admin/categories/add`,
+    method: "POST",
+    data: request,
+  });
+};
+
+
 export const getSingleMovie = (request) => {
   return onApiCall({
     url: `/read/movies/${request.id}`,
@@ -64,5 +73,15 @@ export const getPreviouslyWatchedMovies = (request) => {
       request.page ? request.page : "1"}`,
     method: "GET",
     data: request,
+  });
+};
+
+
+export const uploadObject = (formdata) => {
+  return onApiCall({
+    url: `/write/video/upload`,
+    method: "POST",
+    data: formdata,
+    isFileUpload:true,
   });
 };

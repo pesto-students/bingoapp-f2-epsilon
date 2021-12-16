@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import "semantic-ui-css/semantic.min.css";
 
 import Login from "./Pages/Authentication/login";
 import Register from "./Pages/Authentication/register";
@@ -14,7 +15,7 @@ import SearchPage from "./Pages/Search/SearchPage";
 import { AuthProvider } from "./Utilities/authContext";
 import AuthRoute from "./Utilities/authRoute";
 import UnauthenticatedRoute from "./Utilities/unauthenticatedRoute";
-import "semantic-ui-css/semantic.min.css";
+import AdminPage from './Pages/Admin/admin'
 import "./App.css";
 
 function App() {
@@ -77,6 +78,15 @@ function App() {
               element={
                 <AuthRoute>
                   <MovieDetailPage />
+                </AuthRoute>
+              }
+            />
+             <Route
+              exact
+              path="/admin"
+              element={
+                <AuthRoute>
+                  <AdminPage />
                 </AuthRoute>
               }
             />
