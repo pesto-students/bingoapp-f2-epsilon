@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Alert from 'react-s-alert';
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import Alert from "react-s-alert";
+import "react-s-alert/dist/s-alert-default.css";
+import "react-s-alert/dist/s-alert-css-effects/slide.css";
 
 import Login from "./Pages/Authentication/login";
 import Register from "./Pages/Authentication/register";
@@ -85,7 +85,7 @@ function App() {
           <Footer />
         </AuthProvider>
       </Router>
-      <Alert stack={{limit: 3}} />
+      <Alert stack={{ limit: 3 }} />
     </div>
   );
 }
