@@ -1,0 +1,35 @@
+name: Client CI
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+        working-directory: gateway
+      - name: Make Build
+        run: npm run build
+        env:
+          CI: false
+        working-directory: gateway
+      - name: serverless deploy s3
+        uses: pesto-students/bingoapp-f2-epsilon@master
+        with:
+          heroku_api_key: 'ab21956e-7c73-4fb8-8ff1-1d8d6743690c'
+          heroku_app_name: "bingo-gateway" #Must be unique in Heroku
+          heroku_email: "mbhanpurawala22@gmail.com"
+          procfile: "web: npm start"
+          appdir: "gateway"
+          
+        
