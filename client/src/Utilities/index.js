@@ -199,3 +199,18 @@ export const categories=[
   {id:1,name:'Romance'},
   {id:1,name:'Thriller'},
 ]
+
+// required fields starts
+export const validateInputs = (obj) => {
+  //   const items = Object.keys(obj);
+    const values = Object.values(obj);
+    const isValid=values.every(val=>val.length>0)
+  //   const errors = {};
+  //   items.forEach((key) => {
+  //     const value = obj[key];
+  //     if (!value) {
+  //       errors[key] = "This field is required";
+  //     }
+  //   });
+    return isValid;
+  };

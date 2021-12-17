@@ -16,7 +16,7 @@ export default function VideoPlayer({thumbnail}) {
       playsInline
       poster={thumbnail}
       controls
-      src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+      src="https://bingo-app.s3.ap-south-1.amazonaws.com/2pHpxyiZf-buck1.mp4"
     >
       <ControlBar>
         <ReplayControl seconds={5} order={2.1} />

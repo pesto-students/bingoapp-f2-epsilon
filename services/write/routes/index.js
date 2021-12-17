@@ -43,5 +43,6 @@ router.post(
 );
 
 router.post("/admin/video/upload", uploadS3.single("video_name"), VideoController.video_upload);
+router.post("/admin/video/thumbnail",uploadS3.single("image_name"), VideoController.video_thumbnail);
 
 module.exports = router;

@@ -41,5 +41,4 @@ exports.uploadS3 = multer({
       cb(null, shortid.generate() + "-" + file.originalname);
     },
   }),
-  fileFilter,
 });

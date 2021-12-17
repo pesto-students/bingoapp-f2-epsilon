@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 const { Category } = require("../models/category");
 // const { createClient } = require('redis');
-const client = require("../initRedis");
+// const client = require("../initRedis");
 // Getting all Category Data
 exports.categories_all = async (req, res) => {
   //change host to localhost and port accordingly
   // const client = createClient({host: '0.0.0.0', port: 6379});
-  let searchTerm = "categories_all";
-  const value = await client.get(searchTerm);
-  if (value) {
-    console.log("catch hit");
-    res.status(200).json(JSON.parse(value));
-  } else {
-    console.log("catch miss");
+  // let searchTerm = "categories_all";
+  // const value = await client.get(searchTerm);
+  // if (value) {
+  //   console.log("catch hit");
+  //   res.status(200).json(JSON.parse(value));
+  // } else {
+  //   console.log("catch miss");
     Category.find({},async (err, data) => {
       if (!err) {
         res.status(200).json(data);
-        await client.set(searchTerm, JSON.stringify(data));
+        // await client.set(searchTerm, JSON.stringify(data));
       } else {
         console.log(err);
         res.status(500).json({
@@ -24,7 +24,7 @@ exports.categories_all = async (req, res) => {
         });
       }
     });
-  }
+  // }
 };
 
 //Display Single Category

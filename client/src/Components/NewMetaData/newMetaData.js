@@ -6,6 +6,11 @@ import MultipleValueTextInput from "react-multivalue-text-input";
 import InputGroup from "../InputGroup/inputGroup";
 import Button from "../Button/button";
 import ErrorField from "../ErrorField/errorField";
+import Dropdown from "../Dropdown/dropdown";
+import { validateInputs } from "../../Utilities";
+import { createMovies } from "../../Services/apiCalls";
+import UploadIcon from "../../assets/uploadImg.png";
+import { uploadObject } from "../../Services/apiCalls";
 
 // styling starts
 const Flexbox = styled.div`
@@ -28,6 +33,26 @@ const GridContainer = styled.div`
     display: block;
   }
 `;
+
+const Uploader = styled.img`
+  cursor: pointer;
+  width: 100%;
+  object-fit: contain;
+`;
+const Input = styled.input`
+  position: absolute;
+  left: 0;
+  right: -0px;
+  top: 0px;
+  bottom: 0px;
+  display: block;
+  width: 100%;
+  opacity: 0;
+`;
+const InputWrapper = styled.div`
+  position: relative;
+  width: 500px;
+`;
 // styling ends
 const initState = {
   name: "",
@@ -37,30 +62,106 @@ const initState = {
   language: "",
   year: "",
   categories: "",
-  cast: "",
+  cast: [],
   description: "",
 };
-export default function NewMetaData() {
+export default function NewMetaData(props) {
   const [formErrors, setFormErrors] = useState("");
   const [fieldErrors, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
   const [movieObj, setMovieObj] = useState(initState);
 
-  const { name, duration, language, year, cast, description, categories } =
+  const { name, duration, language, year, cast, description, categories,image } =
     movieObj;
 
-  const onContinue = async () => {};
+  useEffect(() => {
+    const obj = {
+      ...movieObj,
+      video_name: props.data.movie,
+    };
+    setMovieObj(obj);
+  }, []);
 
   // on FormSubmission starts
 
   // input change function starts
-  const inputChange = (event) => {};
+  const inputChange = (event) => {
+    const obj = { ...movieObj };
+    const { name, value } = event.target;
+    obj[name] = value;
+    setMovieObj(obj);
+  };
   // input change function ends
+
+  const dropdownChange = (val) => {
+    const obj = { ...movieObj };
+    obj["categories"] = val;
+    setMovieObj(obj);
+  };
+
+  const onCastAdd = (val) => {
+    console.log("vl", val);
+    const obj = { ...movieObj };
+    let castArr = obj.cast;
+    if (castArr.indexOf(val) === -1) {
+      castArr.push(val);
+    }
+    obj["cast"] = castArr;
+    setMovieObj(obj);
+  };
+
+  const onCastDelete = (val) => {
+    const obj = { ...movieObj };
+    let castArr = obj.cast.filter((x) => x !== val);
+    obj["cast"] = castArr;
+    setMovieObj(obj);
+  };
+
+  const onSubmit = () => {
+    console.log("movies", movieObj);
+    const isValid = validateInputs({ ...movieObj });
+    if (isValid) {
+      setFormErrors("");
+      setLoading(true);
+      onFormSubmission();
+    } else {
+      setLoading(false);
+      setFormErrors("Please fill all the required fields");
+    }
+  };
+
+  const onFormSubmission = async () => {
+    const req = { ...movieObj };
+    let newCategories = req.categories.map((x) => x.name);
+    console.log("categories", newCategories);
+    const { data, status } = await createMovies({
+      ...req,
+      categories: newCategories,
+    });
+  };
+
+  const pickVideo = (event) => {
+    uploadVideo(event.target.files[0]);
+  };
+
+  const uploadVideo = async (file) => {
+    const formdata = new FormData();
+    formdata.append("video_name", file, file.name);
+    const { data, status } = await uploadObject(formdata);
+    if (status === 201) {
+      if (data.status === 1) {
+        const obj = { ...movieObj };
+        obj['image'] = data.location;
+        setMovieObj(obj);
+      }
+    }
+    // if (status === 200) onUploaded(data);
+  };
 
   return (
     <FormWrapper>
       <InputGroup
-        name="Title"
+        name="Title*"
         input={{
           placeholder: "Movie Title",
           value: name,
@@ -80,7 +181,7 @@ export default function NewMetaData() {
           }}
         />
         <InputGroup
-          name="Movie release time"
+          name="Movie release time*"
           input={{
             placeholder: "dd/mm/yyyy",
             onChange: inputChange,
@@ -91,7 +192,7 @@ export default function NewMetaData() {
         />
       </GridContainer>
       <InputGroup
-        name="Description"
+        name="Description*"
         input={{
           placeholder: "Description",
           onChange: inputChange,
@@ -100,7 +201,7 @@ export default function NewMetaData() {
         }}
       />
       <InputGroup
-        name="Language"
+        name="Language*"
         input={{
           placeholder: "Language",
           onChange: inputChange,
@@ -109,12 +210,28 @@ export default function NewMetaData() {
         }}
       />
       <MultipleValueTextInput
-        onItemAdded={(item, allItems) => console.log(`Item added: ${item}`)}
-        onItemDeleted={(item, allItems) => console.log(`Item removed: ${item}`)}
+        onItemAdded={onCastAdd}
+        onItemDeleted={onCastDelete}
         label="Casts"
         name="cast"
         placeholder="Enter movie casts"
       />
+      <Dropdown
+        placeholder="Select categories"
+        options={props.categories}
+        value={categories}
+        onChange={dropdownChange}
+        isMulti={true}
+      />
+      <InputWrapper>
+        <Input
+          type="file"
+          name="file"
+          accept="image/png"
+          onChange={pickVideo}
+        />
+        <Uploader src={image?image:UploadIcon} alt="uploader logo" />
+      </InputWrapper>
       <GridContainer gap="5px" columns="repeat(3,1fr)"></GridContainer>
       {formErrors && <ErrorField err={formErrors} />}
       <Flexbox>
@@ -126,7 +243,7 @@ export default function NewMetaData() {
               disabled={fieldErrors}
               width="auto"
               name="Submit"
-              onClick={onContinue}
+              onClick={onSubmit}
             />
           </>
         )}

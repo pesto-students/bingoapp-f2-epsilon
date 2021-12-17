@@ -32,7 +32,7 @@ const Button = styled.button`
   min-width: 200px;
   border-radius: 10px;
   padding: 10px 15px;
-  color: white;
+  color:${props=>props.color?props.color:'white'};
   border: 2px solid #000;
   background: transparent;
 `;
@@ -95,10 +95,14 @@ export default function AdminPage() {
     onOpenModal();
   };
 
-  const onUpdateCategoryTable=async()=>{
-      onCloseModal()
-      getCategories()
-  }
+  const onUpdateCategoryTable = async () => {
+    onCloseModal();
+    getCategories();
+  };
+
+  const categoriesOptions = categoriesData.map((x) => {
+    return { ...x, label: x.name, value: x.name };
+  });
 
   return (
     <PageWrapper>
@@ -113,13 +117,17 @@ export default function AdminPage() {
           <Table data={categoriesData} />
           <FlexWrapper>
             <H3>Movie Lists</H3>
-            <Button onClick={onNewMovie}>+ Add new movie</Button>
+            <Button color='black' onClick={onNewMovie}>+ Add new movie</Button>
           </FlexWrapper>
           <Table data={data.docs} />
         </>
       )}
       <Modal showCloseIcon={false} open={open} onClose={onCloseModal} center>
-        {isMovie?<NewMovie/>:<NewCtegory  success={onUpdateCategoryTable} />}
+        {isMovie ? (
+          <NewMovie options={categoriesOptions} />
+        ) : (
+          <NewCtegory success={onUpdateCategoryTable} />
+        )}
       </Modal>
     </PageWrapper>
   );

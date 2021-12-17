@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "firebase": "^9.5.0",
     "firebase-admin": "^10.0.0",
+    "fluent-ffmpeg": "^2.1.2",
     "mongoose": "^6.0.13",
     "mongoose-paginate-v2": "^1.4.2",
     "mongoose-type-url": "^2.1.0",

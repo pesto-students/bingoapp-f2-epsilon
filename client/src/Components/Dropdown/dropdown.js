@@ -1,6 +1,22 @@
 import React from "react";
 import Select from "react-select";
 
+import styled from "styled-components";
+
+const Label = styled.label`
+  font-weight: 500;
+  display: block;
+`;
+const FormLabel = styled(Label)`
+  font-size: 16px;
+  line-height: 22px;
+  color: #202020;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 class select extends React.Component {
   customStyles = {
     dropdownIndicator: this.dropdownIndicatorStyles,
@@ -8,11 +24,11 @@ class select extends React.Component {
       ...base,
       padding: "5.5px 5px",
       transition: "none",
-      maxWidth: "288px",
       textTransform: "capitalize",
       width: "100%",
       background: " #FFFFFF",
       border: "0px",
+      margin:'10px 0',
       outline: "none",
       boxShadow: " inset 0px 0px 4px rgba(0, 0, 0, 0.2)",
       borderRadius: "4px",
@@ -24,7 +40,6 @@ class select extends React.Component {
     menu: (base) => ({
       ...base,
       marginTop: "0px",
-      maxWidth: "288px",
       outline: "none",
       zIndex: "3",
       textTransform: "capitalize",
@@ -35,7 +50,6 @@ class select extends React.Component {
       ...base,
       color: "#575757;",
       fontSize: "12px",
-      maxWidth: "288px",
       textTransform: "capitalize",
     }),
     option: (provided, state) => ({
@@ -64,6 +78,8 @@ class select extends React.Component {
   };
   render() {
     return (
+      <>
+      <FormLabel>Select Category</FormLabel>
       <Select
         className={this.props.classname}
         // components={{ DropdownIndicator }}
@@ -79,6 +95,7 @@ class select extends React.Component {
         menuIsOpen={this.props.menuIsOpen}
         isMulti={this.props.isMulti}
       />
+      </>
     );
   }
 }

@@ -85,3 +85,12 @@ export const uploadObject = (formdata) => {
     isFileUpload:true,
   });
 };
+
+export const createMovies = (request) => {
+  return onApiCall({
+    url: `/admin/movies/add`,
+    method: "POST",
+    data: request,
+  });
+};
+

@@ -9,6 +9,7 @@ import {
   ForwardControl,
   ReplayControl,
 } from "video-react";
+import VideoToThumb from "video-thumb-generator";
 
 import { uploadObject } from "../../Services/apiCalls";
 import Button from "../Button/button";
@@ -18,7 +19,7 @@ import NewMetaData from "../NewMetaData/newMetaData";
 
 const Uploader = styled.img`
   cursor: pointer;
-  width: 100%;
+  width: 60%;
   object-fit: contain;
 `;
 const UploadWrapper = styled.div`
@@ -48,16 +49,35 @@ const FormWrapper = styled.div`
   min-width: 300px;
 `;
 
-export default function NewMovie() {
+export default function NewMovie(props) {
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState("");
   const [movie, setMovie] = useState("");
   const [isUploaded, setUploaded] = useState(false);
+  const [thumbnail, setThumbnail] = useState('');
+
 
   const pickVideo = (event) => {
     setVideo(event.target.files[0]);
   };
+
+
+  // const getThumbnail=(file)=>{
+  //   const videoToThumb = new VideoToThumb(file);
+  //   videoToThumb
+  //     .load()
+  //     .xy([0, 0])
+  //     .size([480, 360])
+  //     .positions([15])
+  //     .type('base64')
+  //     .error(function (err) {
+  //       console.log('thub err',JSON.stringify(err));
+  //     })
+  //     .done(function (imgs) {
+  //       setThumbnail(imgs[0])
+  //     });
+  // }
 
   const uploadVideo = async () => {
     setLoading(true);
@@ -79,7 +99,8 @@ export default function NewMovie() {
   return (
     <UploadWrapper>
       <Header>Upload a Movie</Header>
-      {isUploaded ? (
+      {!isUploaded ? (
+        <>
         <InputWrapper>
           <Input
             type="file"
@@ -98,7 +119,9 @@ export default function NewMovie() {
               </ControlBar>
             </Player>
           )}
-          {formErrors && <ErrorField err={formErrors} />}
+          
+        </InputWrapper>
+        {formErrors && <ErrorField err={formErrors} />}
           {video ? (
             loading ? (
               <div>Loading</div>
@@ -108,9 +131,9 @@ export default function NewMovie() {
           ) : (
             ""
           )}
-        </InputWrapper>
+        </>
       ) : (
-        <NewMetaData />
+        <NewMetaData data={{movie:movie}} categories={props.options} />
       )}
     </UploadWrapper>
   );
