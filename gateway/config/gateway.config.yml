@@ -56,6 +56,10 @@ pipelines:
     apiEndpoints:
       - write
     policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - auth:
           - action:
               baseUrl: 'http://example.com'
@@ -82,9 +86,6 @@ pipelines:
     apiEndpoints:
       - stream
     policies:
-      - auth:
-          - action:
-              baseUrl: 'http://example.com'
       - proxy:
           - action:
               serviceEndpoint: streamService

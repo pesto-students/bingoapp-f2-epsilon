@@ -11,6 +11,7 @@ import {
 } from "video-react";
 import VideoToThumb from "video-thumb-generator";
 
+import Loader from "../Loader/loader";
 import { uploadObject } from "../../Services/apiCalls";
 import Button from "../Button/button";
 import UploadIcon from "../../assets/uploadImg.png";
@@ -124,7 +125,7 @@ export default function NewMovie(props) {
         {formErrors && <ErrorField err={formErrors} />}
           {video ? (
             loading ? (
-              <div>Loading</div>
+              <Loader/>
             ) : (
               <Button width="auto" name="Upload" onClick={uploadVideo} />
             )
@@ -133,7 +134,7 @@ export default function NewMovie(props) {
           )}
         </>
       ) : (
-        <NewMetaData data={{movie:movie}} categories={props.options} />
+        <NewMetaData success={props.success} data={{movie:movie}} categories={props.options} />
       )}
     </UploadWrapper>
   );

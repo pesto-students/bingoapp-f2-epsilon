@@ -100,7 +100,7 @@ exports.category_search = async(req, res) => {
           }
         }
         res.status(200).json({
-          movie: finalData,
+          movie: {docs:finalData},
         });
         // await client.set(searchTerm, JSON.stringify({movie:finalData}));
       } else {

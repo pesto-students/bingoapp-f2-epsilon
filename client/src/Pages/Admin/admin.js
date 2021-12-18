@@ -11,7 +11,7 @@ import Table from "../../Components/Table/table";
 import { getAllCategories, getAllMovies } from "../../Services/apiCalls";
 import Loader from "../../Parts/Loader/loader";
 // import { useAuth } from "../../Utilities/authContext";
-
+import Pagination from '../../Components/Pagination/pagination'
 const PageWrapper = styled.div`
   max-width: 1127px;
   margin-left: auto !important;
@@ -42,6 +42,8 @@ export default function AdminPage() {
   const [data, setMoviesData] = useState([]);
   const [open, setOpen] = useState(false);
   const [isMovie, setNewMovie] = useState(false);
+  const [currentPage, setPage] = useState(1);
+
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -100,9 +102,19 @@ export default function AdminPage() {
     getCategories();
   };
 
+  const onUpdateMovieTable = async () => {
+    onCloseModal();
+    getMoviesData()
+  };
+
   const categoriesOptions = categoriesData.map((x) => {
-    return { ...x, label: x.name, value: x.name };
+    return { ...x, label: x.name, value: x._id };
   });
+
+  const onPageChange=(val)=>{
+    setPage(val)
+    getMoviesData(val)
+  }
 
   return (
     <PageWrapper>
@@ -120,11 +132,12 @@ export default function AdminPage() {
             <Button color='black' onClick={onNewMovie}>+ Add new movie</Button>
           </FlexWrapper>
           <Table data={data.docs} />
+          <Pagination changeGoTo={onPageChange} currentPage={currentPage} data={data} />
         </>
       )}
       <Modal showCloseIcon={false} open={open} onClose={onCloseModal} center>
         {isMovie ? (
-          <NewMovie options={categoriesOptions} />
+          <NewMovie success={onUpdateMovieTable} options={categoriesOptions} />
         ) : (
           <NewCtegory success={onUpdateCategoryTable} />
         )}
