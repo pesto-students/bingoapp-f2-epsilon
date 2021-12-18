@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const httpClient = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "https://bingo-gateway.herokuapp.com/",
   timeout: 36000,
 });
 
