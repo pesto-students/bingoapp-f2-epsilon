@@ -1,30 +1,27 @@
 http:
-  port: 8080
-admin:
-  port: 9876
-  host: localhost
+  port: ${PORT}
 apiEndpoints:
   read:
-    host: localhost
+    host: bingo-gateway.herokuapp.com
     paths: ['/read','/read/*']
   write:
-    host: localhost
+    host: bingo-gateway.herokuapp.com
     paths: ['/write','/write/*']
   admin:
-    host: localhost
+    host: bingo-gateway.herokuapp.com
     paths: ['/admin','/admin/*']
   stream:
-    host: localhost
+    host: bingo-gateway.herokuapp.com
     paths: ['/stream','/stream/*']
 serviceEndpoints:
   readService:
-    url: 'http://localhost:8001'
+    url: 'https://bingo-read.herokuapp.com'
   writeService:
-    url: 'http://localhost:8002'
+    url: 'https://bingo-write.herokuapp.com'
   adminService:
-    url: 'http://localhost:8002'
+    url: 'https://bingo-write.herokuapp.com'
   streamService:
-    url: 'http://localhost:8003'
+    url: 'https://bingo-stream-movie.herokuapp.com'
 policies:
   - basic-auth
   - cors
