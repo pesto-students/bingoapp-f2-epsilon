@@ -14,6 +14,7 @@ import VideoPlayerPage from "./Pages/videoPlayer/videoPlayerPage";
 import SearchPage from "./Pages/Search/SearchPage";
 import { AuthProvider } from "./Utilities/authContext";
 import AuthRoute from "./Utilities/authRoute";
+import AdminRoute from "./Utilities/adminRoute";
 import UnauthenticatedRoute from "./Utilities/unauthenticatedRoute";
 import AdminPage from './Pages/Admin/admin'
 import "./App.css";
@@ -85,9 +86,9 @@ function App() {
               exact
               path="/admin"
               element={
-                <AuthRoute>
+                <AdminRoute>
                   <AdminPage />
-                </AuthRoute>
+                </AdminRoute>
               }
             />
           </Routes>
