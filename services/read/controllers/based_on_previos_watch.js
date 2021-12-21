@@ -44,32 +44,36 @@ exports.based_on_previous_watch_show = (req, res) => {
             cast: final_cast_array,
           });
         }
-        Movie.paginate(
-          {
-            $and: [
-              {
-                cast: { $in: finalData[0].cast },
-              },
-              {
-                categories: { $in: finalData[0].categories },
-              },
-            ],
-          },
-          {
-            limit: 8,
-            page: req.query.page ? req.query.page : "1",
-            populate: "categories",
-          },
-          (err, docs) => {
-            if (!err) {
-              res.status(200).json(docs);
-            } else {
-              res.status(500).json({
-                error: err,
-              });
+        if (finalData.length > 0) {
+          Movie.paginate(
+            {
+              $and: [
+                {
+                  cast: { $in: finalData[0].cast },
+                },
+                {
+                  categories: { $in: finalData[0].categories },
+                },
+              ],
+            },
+            {
+              limit: 8,
+              page: req.query.page ? req.query.page : "1",
+              populate: "categories",
+            },
+            (err, docs) => {
+              if (!err) {
+                res.status(200).json(docs);
+              } else {
+                res.status(500).json({
+                  error: err,
+                });
+              }
             }
-          }
-        );
+          );
+        } else {
+          res.status(200).json([]);
+        }
       } else {
         console.log(err);
         res.status(500).json({

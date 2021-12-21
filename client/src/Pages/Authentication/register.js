@@ -37,7 +37,8 @@ function Register() {
     try {
       setError("");
       setLoading(true);
-      await signup(formData.email, formData.password);
+      const data = await signup(formData.email, formData.password);
+      localStorage.setItem("auth_token", data.user.ya);
       navigate("/", { replace: true });
     } catch {
       setError("Failed to create an account");

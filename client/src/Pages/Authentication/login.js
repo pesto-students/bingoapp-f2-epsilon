@@ -25,8 +25,8 @@ function Login() {
     try {
       setError("");
       setLoading(true);
-      const data=await login(formData.email, formData.password);
-      localStorage.setItem('auth_token',data.user.ya)
+      const data = await login(formData.email, formData.password);
+      localStorage.setItem("auth_token", data.user.ya);
       navigate("/", { replace: true });
     } catch {
       setError("Email or Password is Incorrect");
@@ -68,7 +68,12 @@ function Login() {
                 />
               </Form.Field>
 
-              <Button disabled={loading} data-testid="login" color="red" type="submit">
+              <Button
+                disabled={loading}
+                data-testid="login"
+                color="red"
+                type="submit"
+              >
                 Log In
               </Button>
             </Form>
