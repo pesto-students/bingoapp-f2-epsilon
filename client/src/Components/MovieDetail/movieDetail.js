@@ -67,7 +67,7 @@ function MovieDetail({ data }) {
           <>
             <Item.Content style={imageStyle}>
               <Link to={`/videos/${data._id}`}>
-                <VideoPlayer thumbnail={data.image} />
+                <VideoPlayer src={data.video_name} thumbnail={data.image} />
               </Link>
             </Item.Content>
             <Item.Content style={itemContentStyle}>

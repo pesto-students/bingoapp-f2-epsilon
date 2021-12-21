@@ -68,6 +68,7 @@ function SearchBar() {
       navigate(`/search/title/${name}`);
     }else{
       navigate(`/`);
+      setMovie('');
     }
   };
 

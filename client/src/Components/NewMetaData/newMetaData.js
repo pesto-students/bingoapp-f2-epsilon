@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import MultipleValueTextInput from "react-multivalue-text-input";
+import Alert from "react-s-alert";
 
 import InputGroup from "../InputGroup/inputGroup";
 import Button from "../Button/button";
@@ -10,7 +11,8 @@ import Dropdown from "../Dropdown/dropdown";
 import { validateInputs } from "../../Utilities";
 import { createMovies } from "../../Services/apiCalls";
 import UploadIcon from "../../assets/uploadImg.png";
-import { uploadObject } from "../../Services/apiCalls";
+import { uploadObject,uploadImage } from "../../Services/apiCalls";
+import Loader from "../Loader/loader";
 
 // styling starts
 const Flexbox = styled.div`
@@ -36,7 +38,7 @@ const GridContainer = styled.div`
 
 const Uploader = styled.img`
   cursor: pointer;
-  width: 100%;
+  width: 60%;
   object-fit: contain;
 `;
 const Input = styled.input`
@@ -71,8 +73,16 @@ export default function NewMetaData(props) {
   const [loading, setLoading] = useState(false);
   const [movieObj, setMovieObj] = useState(initState);
 
-  const { name, duration, language, year, cast, description, categories,image } =
-    movieObj;
+  const {
+    name,
+    duration,
+    language,
+    year,
+    cast,
+    description,
+    categories,
+    image,
+  } = movieObj;
 
   useEffect(() => {
     const obj = {
@@ -132,12 +142,22 @@ export default function NewMetaData(props) {
 
   const onFormSubmission = async () => {
     const req = { ...movieObj };
-    let newCategories = req.categories.map((x) => x.name);
+    let newCategories = req.categories.map((x) => x.value);
     console.log("categories", newCategories);
     const { data, status } = await createMovies({
       ...req,
       categories: newCategories,
     });
+    if(status===201){
+      Alert.success(data.message, {
+        position: "top-right",
+        effect: "slide",
+        beep: false,
+        timeout: 2000,
+        offset: 0,
+      });
+      props.success()
+    }
   };
 
   const pickVideo = (event) => {
@@ -146,12 +166,12 @@ export default function NewMetaData(props) {
 
   const uploadVideo = async (file) => {
     const formdata = new FormData();
-    formdata.append("video_name", file, file.name);
-    const { data, status } = await uploadObject(formdata);
+    formdata.append("video_name", file);
+    const { data, status } = await uploadImage(formdata);
     if (status === 201) {
       if (data.status === 1) {
         const obj = { ...movieObj };
-        obj['image'] = data.location;
+        obj["image"] = data.location;
         setMovieObj(obj);
       }
     }
@@ -227,16 +247,16 @@ export default function NewMetaData(props) {
         <Input
           type="file"
           name="file"
-          accept="image/png"
+          accept="image/png,image/jpg,image/jpeg"
           onChange={pickVideo}
         />
-        <Uploader src={image?image:UploadIcon} alt="uploader logo" />
+        <Uploader src={image ? image : UploadIcon} alt="uploader logo" />
       </InputWrapper>
       <GridContainer gap="5px" columns="repeat(3,1fr)"></GridContainer>
       {formErrors && <ErrorField err={formErrors} />}
       <Flexbox>
         {loading ? (
-          <div>Loading</div>
+          <Loader/>
         ) : (
           <>
             <Button

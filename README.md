@@ -64,13 +64,12 @@ npm run build
 * Git
 * Docker
 * Github
-* Jenkins
-* Docker
-* Kubernetes
+
+
 
 ## Utilities
 
-* Kafka
+
 
 ## Business tools
 

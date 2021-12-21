@@ -6,6 +6,7 @@ import Input from "../Input/input";
 import Button from "../Button/button";
 import { set } from "lodash";
 import { addNewCategory } from "../../Services/apiCalls";
+import Alert from "react-s-alert";
 
 const FormWrapper = styled.div`
   margin: 20px 0;
@@ -24,6 +25,13 @@ export default function NewCtegory(props) {
     return;
     const{data,status}=await addNewCategory({name})
     if(status===200 || status===201){
+      Alert.success(data.message, {
+        position: "top-right",
+        effect: "slide",
+        beep: false,
+        timeout: 2000,
+        offset: 0,
+      });
         props.success()
     }
   }

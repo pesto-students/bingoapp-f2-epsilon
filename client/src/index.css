@@ -267,3 +267,57 @@ input::placeholder,
 .multiple-value-text-input-item-container >p{
 	margin: 15px 0!important;
 }
+
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0px;
+}
+.pagination-label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #006699;
+}
+.go-to-page-input {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #313a46;
+  border: 0px;
+  border-bottom: 1px solid #006699;
+  outline: none;
+  max-width: 23px;
+}
+.go-page-section > label {
+  margin-right: 5px;
+}
+.pages-inner-section {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.single-page {
+  margin: 0;
+  padding: 0 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 18px;
+  color: #c7c7c7;
+  cursor: pointer;
+}
+.active-page {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 28px;
+  color: #313a46;
+}

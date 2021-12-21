@@ -10,13 +10,14 @@ import {
 } from "video-react";
 
 
-export default function VideoPlayer({thumbnail}) {
+export default function VideoPlayer({thumbnail,auto,src}) {
   return (
     <Player
       playsInline
       poster={thumbnail}
       controls
-      src="https://bingo-app.s3.ap-south-1.amazonaws.com/2pHpxyiZf-buck1.mp4"
+      autoPlay={auto}
+      src={src?src:"https://bingo-app.s3.ap-south-1.amazonaws.com/2pHpxyiZf-buck1.mp4"}
     >
       <ControlBar>
         <ReplayControl seconds={5} order={2.1} />

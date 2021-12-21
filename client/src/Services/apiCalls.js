@@ -85,6 +85,15 @@ export const uploadObject = (formdata) => {
     isFileUpload:true,
   });
 };
+export const uploadImage = (formdata) => {
+  return onApiCall({
+    url: `/admin/video/thumbnail`,
+    method: "POST",
+    data: formdata,
+    isFileUpload:true,
+  });
+};
+
 
 export const createMovies = (request) => {
   return onApiCall({
@@ -94,3 +103,10 @@ export const createMovies = (request) => {
   });
 };
 
+export const createPrevoiousWatchedMovies = (request) => {
+  return onApiCall({
+    url: `/write/based_on_previous_watch/add`,
+    method: "POST",
+    data: request,
+  });
+};
