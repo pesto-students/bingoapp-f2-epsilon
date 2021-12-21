@@ -14,6 +14,8 @@ function AdminRoute({ children }) {
       currentUser.getIdTokenResult().then((idTokenResult) => {
         if (!!idTokenResult.claims.admin) {
           setAdminUser(idTokenResult.claims.admin);
+        } else {
+          setAdminUser(false);
         }
       });
     }

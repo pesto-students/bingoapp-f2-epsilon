@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Header,
@@ -13,9 +13,23 @@ import { useAuth } from "../../Utilities/authContext";
 import { headerOptions } from "../../Utilities";
 import SearchBar from "../../Components/SearchBar/searchBar";
 
+function AdminButton({ adminButton }) {
+  return adminButton ? (
+    <Link to="/admin">
+      <Button variant="link" className="logoutbtn">
+        Admin <Icon name="adn" />
+      </Button>
+    </Link>
+  ) : (
+    ""
+  );
+}
+
 function SingleHeader() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const [adminButton, setAdminButton] = useState(false);
+
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -29,6 +43,18 @@ function SingleHeader() {
     }
   }
 
+  useEffect(() => {
+    if (currentUser) {
+      currentUser.getIdTokenResult().then((idTokenResult) => {
+        if (!!idTokenResult.claims.admin) {
+          setAdminButton(idTokenResult.claims.admin);
+        } else {
+          setAdminButton(false);
+        }
+      });
+    }
+  });
+
   return (
     <div>
       <Segment clearing inverted>
@@ -41,7 +67,11 @@ function SingleHeader() {
           {currentUser ? (
             <Header size="small" inverted floated="left">
               <Header.Content className="flex">
-                <Dropdown text="Categories" className='invisible' options={headerOptions} />
+                <Dropdown
+                  text="Categories"
+                  className="invisible"
+                  options={headerOptions}
+                />
                 <SearchBar />
               </Header.Content>
             </Header>
@@ -51,32 +81,39 @@ function SingleHeader() {
           <Header size="medium" floated="right">
             {error && <Message error header={error} />}
             <div className="flex">
-              {currentUser ? (
-                <>
-                  <Button
-                    variant="link"
-                    className="logoutbtn"
-                    onClick={handleLogout}
-                  >
-                    Log Out <Icon name="sign out" />
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <Link to="/login">
-                      <span className="rscontent">Log In</span>{" "}
-                      <Icon className="rsicon" name="sign in" />
-                    </Link>
-                  </div>
-                  <div>
-                    <Link to="/register">
-                      <span className="rscontent">Sign Up</span>{" "}
-                      <Icon className="rsicon" name="signup" />
-                    </Link>
-                  </div>
-                </>
-              )}
+              <>
+                {currentUser ? (
+                  <>
+                    {adminButton ? (
+                      <AdminButton adminButton={adminButton} />
+                    ) : (
+                      ""
+                    )}
+                    <Button
+                      variant="link"
+                      className="logoutbtn"
+                      onClick={handleLogout}
+                    >
+                      Log Out <Icon name="sign out" />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <Link to="/login">
+                        <span className="rscontent">Log In</span>{" "}
+                        <Icon className="rsicon" name="sign in" />
+                      </Link>
+                    </div>
+                    <div>
+                      <Link to="/register">
+                        <span className="rscontent">Sign Up</span>{" "}
+                        <Icon className="rsicon" name="signup" />
+                      </Link>
+                    </div>
+                  </>
+                )}
+              </>
             </div>
           </Header>
         </Container>
