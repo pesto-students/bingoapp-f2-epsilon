@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem("auth_token");
     return auth.signOut();
   }
 
@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
     auth
       .signInWithPopup(googleProvider)
       .then((res) => {
-        localStorage.setItem('auth_token',res.user.ya)
+        localStorage.setItem("auth_token", res.user.ya);
         window.location.href = "/";
       })
       .catch((error) => {
@@ -44,7 +44,9 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
-
+  if (currentUser) {
+    localStorage.setItem("auth_token", currentUser.ya);
+  }
   const value = {
     currentUser,
     login,
