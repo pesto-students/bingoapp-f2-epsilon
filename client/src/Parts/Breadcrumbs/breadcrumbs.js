@@ -11,8 +11,8 @@ const breadcrumbsStyle = {
 
 function Breadcrumbs({data}) {
   const sections = [
-    { key: "Home", content: "Home", link: true , href: "/" },
-    { key: "Watch", content: "Watch", link: true , href: `/watch/${data._id}`},
+    { key: "Home", content: "Home", link: false },
+    { key: "Watch", content: "Watch", link: false },
     { key: data.name, content: data.name, link: false },
   ];
   return (
