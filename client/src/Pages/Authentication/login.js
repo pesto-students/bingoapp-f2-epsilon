@@ -4,20 +4,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Utilities/authContext";
 
 function Login() {
-  const [formData, updateFormData] = useState();
+  // const [formData, updateFormData] = useState();
+  const [email, setEmail] = useState("pesto@pesto.tech");
+  const [password, setPassword] = useState("pesto@");
   const { login, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
+  // const handleChange = (e) => {
+  //   updateFormData({
+  //     ...formData,
 
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
+  //     // Trimming any whitespace
+  //     [e.target.name]: e.target.value.trim(),
+  //   });
+  // };
+  const changeEmail = (e) =>{
+    setEmail(e.target.value);
+  }
+
+  const changePassword = (e) =>{
+    setPassword(e.target.value);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -25,7 +34,7 @@ function Login() {
     try {
       setError("");
       setLoading(true);
-      const data = await login(formData.email, formData.password);
+      const data = await login(email,password);
       localStorage.setItem("auth_token", data.user.ya);
       navigate("/", { replace: true });
     } catch {
@@ -52,8 +61,9 @@ function Login() {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  defaultValue={email} 
                   className="ui transparent"
-                  onChange={handleChange}
+                  onChange={changeEmail}
                   required
                 />
               </Form.Field>
@@ -62,8 +72,9 @@ function Login() {
                 <Form.Input
                   type="password"
                   name="password"
+                  defaultValue={password} 
                   placeholder="Password"
-                  onChange={handleChange}
+                  onChange={changePassword}
                   required
                 />
               </Form.Field>
