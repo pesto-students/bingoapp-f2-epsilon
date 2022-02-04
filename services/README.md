@@ -15,7 +15,7 @@ Welcome! We hope you enjoy the site as much as we enjoyed making it.
 # Table of Contents
 
 1. [Demo](#demo)
-2. [Installation for frontend](#installation)
+2. [Installation for backend](#installation)
 3. [Technology Stack](#technology-stack)
 4. [Authors](#authors)
 5. [License](#license)
@@ -42,23 +42,31 @@ Test Credentials:
  	 - Password: pesto@
 <br/>
 
-# Installation for frontend
+# Installation for backend
 
 1. Clone the repo
     ```
     git clone https://github.com/pesto-students/bingoapp-f2-epsilon.git
     ```
-2. Set up the react server
+2. Set up the backend server
 
     ```sh
-    cd client
+    cd services
     npm install 
     ```
-3. Run the frontend server
+
+3. Set up API gateway
+    ```sh
+    cd gateway
+    npm install
+    ```
+4. Run the backend server
    ```sh
    npm start
    ```
-4. Refer to README_backend.md inside client folder for backend setup
+5. Refer to README.md inside client folder for frontend setup
+<br/>
+ Note: API gateway and backend server should be start in two different terminals.
 
 <br>
 
@@ -66,7 +74,7 @@ Test Credentials:
 
 We tried to use a completely modern tech stack while testing out some new technologies that we had never used before. This resulted in a fast, performant, and easily-extensible web app that should be fairly future-proof for the coming next several years. We used:
 
-- [React JS](https://reactjs.org/)
+- [React](https://reactjs.org/)
 - [Node JS](https://nodejs.org/)
 - [Express JS](https://expressjs.com/)
 - [Mongo DB](https://mongodb.com/)
