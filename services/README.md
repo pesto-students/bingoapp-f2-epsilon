@@ -51,7 +51,15 @@ Test Credentials:
 2. Set up the backend server
 
     ```sh
-    cd services
+    cd services/read
+    npm install 
+    ```
+     ```sh
+    cd services/stream
+    npm install 
+    ```
+     ```sh
+    cd services/write
     npm install 
     ```
 
