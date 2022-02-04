@@ -1,0 +1,96 @@
+http:
+  port: ${PORT}
+apiEndpoints:
+  read:
+    host: bingo-gateway.herokuapp.com
+    paths: ['/read','/read/*']
+  write:
+    host: bingo-gateway.herokuapp.com
+    paths: ['/write','/write/*']
+  admin:
+    host: bingo-gateway.herokuapp.com
+    paths: ['/admin','/admin/*']
+  stream:
+    host: bingo-gateway.herokuapp.com
+    paths: ['/stream','/stream/*']
+serviceEndpoints:
+  readService:
+    url: 'https://bingo-read.herokuapp.com'
+  writeService:
+    url: 'https://bingo-write.herokuapp.com'
+  adminService:
+    url: 'https://bingo-write.herokuapp.com'
+  streamService:
+    url: 'https://bingo-stream-movie.herokuapp.com'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+  - auth
+  - admin
+pipelines:
+  default:
+    apiEndpoints:
+      - read
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - auth:
+          - action:
+              baseUrl: 'http://bingoapp.com'
+      - proxy:
+          - action:
+              serviceEndpoint: readService 
+              changeOrigin: true
+  writePipeline:
+    apiEndpoints:
+      - write
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - auth:
+          - action:
+              baseUrl: 'http://bingoapp.com'
+      - proxy:
+          - action:
+              serviceEndpoint: writeService
+              changeOrigin: true
+  adminPipeline:
+    apiEndpoints:
+      - admin
+    policies:
+      - cors:
+        - action:
+            origin: '*'
+            methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - admin:
+          - action:
+              baseUrl: 'http://bingoapp.com'
+      - proxy:
+          - action:
+              serviceEndpoint: adminService
+              changeOrigin: true
+  streamPipeline:
+    apiEndpoints:
+      - stream
+    policies:
+      - cors:
+        - action:
+            origin: '*'
+            methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - auth:
+          - action:
+              baseUrl: 'http://bingoapp.com'
+      - proxy:
+          - action:
+              serviceEndpoint: streamService
+              changeOrigin: true
